@@ -1,0 +1,34 @@
+Package: TRS.utilities
+Type: Package
+Title: TRS Utility Functions
+Version: 0.1.0
+Author: Arnaud Gallou
+Maintainer: Arnaud Gallou <arnaud.gallou@uib.no>
+Description: Helper functions for the TRS project.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
+Depends:
+  toolkit
+Imports: 
+    dplyr,
+    rlang,
+    tidyr,
+    glue,
+    purrr,
+    readr,
+    tibble,
+    ggplot2,
+    R2jags,
+    loo,
+    ggrepel,
+    ggnewscale,
+    janitor,
+    coda,
+    broom.mixed,
+    ggridges,
+    bayestestR,
+    terra,
+    bayesplot
