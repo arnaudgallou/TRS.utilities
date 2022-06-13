@@ -3,7 +3,6 @@
 #' @param x A single or collection of file names.
 #' @param ... Arguments to pass on to [`terra::rast()`].
 #' @export
-# rs_read <- function(...) terra::rast(...)
 rs_read <- function(x, ...) {
   UseMethod("rs_read")
 }
