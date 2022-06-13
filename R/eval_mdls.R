@@ -19,16 +19,14 @@ eval_mdls <- function(files) {
       loo <- get_ic_estimates(loo, "loo")
     })
 
-    formula <- deparse(data$settings$formula)
-    model <- str_remove(formula, "^\\W")
-    bind_cols(model = model, waic, loo)
+    bind_cols(get_mdl_settings(data), waic, loo)
   }) %>%
     arrange(.data$waic, .data$looic) %>%
     mutate(
       delta_waic = delta(.data$waic),
       delta_looic = delta(.data$looic)
     ) %>%
-    select(.data$model, .data$waic, .data$delta_waic, .data$looic, .data$delta_looic)
+    select(model:std_from, ends_with("waic"), ends_with("looic"))
 }
 
 
