@@ -1,7 +1,7 @@
 #' @description Package containing helper functions to reproduce results from the TRS project.
 #' @keywords internal
 #' @importFrom rlang .data is_formula is_empty quos quo enquo :=
-#' @importFrom dplyr %>% mutate summarize select across filter between rowwise group_by ungroup group_vars if_else pull distinct bind_cols arrange left_join rename slice_sample n vars tibble as_tibble all_of any_of starts_with matches
+#' @importFrom dplyr %>% mutate summarize select across filter between rowwise group_by ungroup group_vars if_else pull distinct bind_cols arrange left_join rename slice_sample n vars tibble as_tibble all_of any_of starts_with ends_with matches rename_with
 #' @importFrom ggplot2 ggplot aes geom_abline geom_ribbon geom_line geom_point geom_errorbar geom_vline geom_hline geom_segment facet_grid as_labeller scale_color_manual scale_fill_manual scale_shape_manual scale_y_continuous theme element_blank element_text margin unit xlab
 #' @importFrom tidyr pivot_wider nest unnest drop_na
 #' @importFrom readr write_rds read_rds read_csv
