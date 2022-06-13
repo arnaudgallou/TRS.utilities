@@ -5,8 +5,6 @@
 extend_jags_summary <- function(x) {
   mutate(
     x,
-    cluster = string_extract(.data$parameter, "\\d+(?=\\])"),
-    parameter = string_extract(.data$parameter, "^\\w+"),
     beta_std = .data$mean / .data$sd,
     x95_ci = if_else(.data$x2_5_percent > 0 & .data$mean > 0 | .data$x97_5_percent < 0 & .data$mean < 0, "0", "1")
   )
