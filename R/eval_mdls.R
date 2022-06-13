@@ -26,7 +26,7 @@ eval_mdls <- function(files) {
       delta_waic = delta(.data$waic),
       delta_looic = delta(.data$looic)
     ) %>%
-    select(model:std_from, ends_with("waic"), ends_with("looic"))
+    select(.data$model:.data$std_from, ends_with("waic"), ends_with("looic"))
 }
 
 
