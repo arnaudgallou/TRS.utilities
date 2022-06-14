@@ -41,7 +41,7 @@ make_jags_output <- function(x, mdl_name, fit) {
   if (mdl_name == "global_scale_mdl") {
     settings_min <- tibble(
       expl_var = expl_vars,
-      elev_grad_len = x$settings$min_elev_grad_len,
+      elevation_span = x$settings$elevation_span,
       exclusion_zone = x$settings$exclusion_zone,
       std_from = x$settings$std_from
     )
@@ -120,7 +120,7 @@ make_filename <- function(x, filename) {
   }
   tail <- if (!is.null(x$std_from)) glue("-{x$std_from}") else ""
   terms <- paste(x$terms, collapse = "_")
-  glue("{terms}-megl_{x$min_elev_grad_len}-exc_{x$exclusion_zone}{tail}.rds")
+  glue("{terms}-span_{x$elevation_span}-excl_{x$exclusion_zone}{tail}.rds")
 }
 
 
