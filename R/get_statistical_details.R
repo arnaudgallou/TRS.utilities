@@ -1,7 +1,7 @@
 #' @title Compute Bayesian R-squared and the probability of posterior fits to be lower than 0
 #' @description Compute Bayesian R-squared and the probability of posterior fits to be lower than 0 from a JAGS model output.
 #' @param x A model object file returned by [`run_jags()`].
-#' @return A [`tibble::tibble()`].
+#' @return A [`tibble`][tibble::tibble()].
 #' @export
 get_statistical_details <- function(x) {
   posteriors <- get_jags_sims(x, "beta")
@@ -37,7 +37,8 @@ calc_jags_r2 <- function(x, posteriors) {
 
   r_squared(fit_var, residuals_var) %>%
     coda::as.mcmc() %>%
-    broom.mixed::tidyMCMC(conf.int = TRUE, conf.method = "HPDinterval")
+    broom.mixed::tidyMCMC(conf.int = TRUE, conf.method = "HPDinterval") %>%
+    rename(r_squared = .data$estimate)
 }
 
 
@@ -48,8 +49,8 @@ r_squared <- function(x, y) {
 
 #' @title Calculate the probability of posterior fits to be lower than 0
 #' @description Calculate the probability of posterior fits to be lower than 0.
-#' @param x A model object file returned by [`run_jags()`].
-#' @return A [`tibble::tibble()`].
+#' @param x A data frame containing posterior fits.
+#' @return A [`tibble`][tibble::tibble()].
 #' @export
 calc_p_inf_0 <- function(x) {
   x %>%

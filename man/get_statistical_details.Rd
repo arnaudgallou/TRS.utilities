@@ -10,7 +10,7 @@ get_statistical_details(x)
 \item{x}{A model object file returned by \code{\link[=run_jags]{run_jags()}}.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}}.
+A \code{\link[tibble:tibble]{tibble}}.
 }
 \description{
 Compute Bayesian R-squared and the probability of posterior fits to be lower than 0 from a JAGS model output.

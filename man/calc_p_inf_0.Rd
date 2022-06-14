@@ -7,10 +7,10 @@
 calc_p_inf_0(x)
 }
 \arguments{
-\item{x}{A model object file returned by \code{\link[=run_jags]{run_jags()}}.}
+\item{x}{A data frame containing posterior fits.}
 }
 \value{
-A \code{\link[tibble:tibble]{tibble::tibble()}}.
+A \code{\link[tibble:tibble]{tibble}}.
 }
 \description{
 Calculate the probability of posterior fits to be lower than 0.
