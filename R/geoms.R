@@ -81,3 +81,27 @@ ppc <- function(y, yrep, n_draws = 100, ...) {
   yrep <- yrep[samp, ]
   bayesplot::ppc_dens_overlay(y, yrep, ...)
 }
+
+
+#' @title Trace plots of MCMC draws
+#' @description Trace plots of MCMC draws.
+#' @param x A data frame.
+#' @param mapping Default list of aesthetic mappings to use for plot. See [`ggplot2::ggplot()`] for details.
+#' @param facets Variables or expressions defining faceting groups on the columns dimension. See [`ggplot2::facet_wrap()`] for details.
+#' @export
+traceplot <- function(x, mapping = aes(), facets) {
+  ggplot(x, mapping) +
+    facet_wrap(
+      facets,
+      ncol = 1,
+      scales = "free_y",
+      strip.position = "left"
+    ) +
+    geom_line() +
+    scale_colour_brewer(direction = -1) +
+    theme_elesic(legend_position = "right") +
+    theme(
+      axis.title = element_blank(),
+      strip.placement = "outside"
+    )
+}
