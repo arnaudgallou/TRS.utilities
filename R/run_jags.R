@@ -31,7 +31,7 @@ run_jags <- function(x, model, ..., save = FALSE, path, filename = NULL, default
 
 make_jags_output <- function(x, mdl_name, fit) {
   vars <- x$settings$terms
-  clim_vars <- vars[grepl("dtr|ts|dmat|ap|mat|bio\\d", vars)]
+  clim_vars <- vars[!grepl("land_type", vars)]
   expl_vars <- paste(vars, collapse = "_")
 
   sims <- jags_array_to_tibble(fit$BUGSoutput$sims.array)
