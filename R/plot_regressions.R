@@ -45,11 +45,16 @@ plot_regressions <- function(
     panel_spacing = unit(.5, "lines"),
     seed = 130821
 ) {
-  if (!is.null(label_colors) && !point_labels) {
+  if (isTRUE(point_labels) && isTRUE(land_type)) {
+    stop('"point_labels" must be FALSE when land_type=TRUE.')
+  }
+  if (!is.null(label_colors) && !isTRUE(point_labels)) {
     stop('"point_labels" must be TRUE to assign label colors.')
   }
-  if (!is.null(ribbon_colors) && !land_type) {
+  if (!is.null(ribbon_colors) && !isTRUE(land_type)) {
     warning('"land_type" must be TRUE to assign ribbon colors.')
+  } else {
+    ribbon_colors <- c("#f57a5b", "#85a9d6")
   }
 
   legend_position <- match.arg(legend_position)
