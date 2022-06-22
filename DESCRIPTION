@@ -31,4 +31,6 @@ Imports:
     ggridges,
     bayestestR,
     terra,
-    bayesplot
+    bayesplot,
+    modelr,
+    utils
