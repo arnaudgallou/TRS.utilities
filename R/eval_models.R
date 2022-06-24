@@ -4,7 +4,7 @@
 #' @param files Path of files containing a JAGS model object returned by [`run_jags()`].
 #' @return A tibble of WAIC and LOO IC estimates with standard error.
 #' @export
-eval_mdls <- function(files) {
+eval_models <- function(files) {
   map_df(files, ~ {
     data <- read_rds(.x)
     loglik_data <- get_jags_sims(data, "loglik")
