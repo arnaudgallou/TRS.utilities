@@ -146,7 +146,7 @@ global_analyses <- function(path) {
 
   eval_models_ = function(...) {
     .get_fls(...) %>%
-      eval_mdls() %>%
+      eval_models() %>%
       round_num(2)
   }
 
