@@ -65,7 +65,7 @@ global_analyses <- function(path) {
     elevation_span,
     exclusion_zone,
     std_from = c("top", "bottom"),
-    type = c("main", "land_type"),
+    type = c("spaghetti", "land_type"),
     point_labels = FALSE,
     ...
   ) {
@@ -213,7 +213,7 @@ local_analyses <- function(path) {
       add_facet_lines()
   }
 
-  # x Data set containing elevation spans
+  # x Dataset containing elevation spans
   plot_influence_elev_span_ = function(x, exclusion_zone = 250) {
     location_elev_span <- x %>%
       group_by(.data$location, .data$elev_span) %>%
