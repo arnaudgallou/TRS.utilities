@@ -98,7 +98,7 @@ plot_regressions <- function(
   plot <- xy$x %>%
     ggplot(aes(
       x = .data$bioclim,
-      y = .data$mean_range_size,
+      y = .data$est_range_mean,
       color = if (point_labels) .data$land_type
     ))
 
@@ -151,8 +151,8 @@ plot_regressions <- function(
     plot <- plot +
       geom_errorbar(
         aes(
-          ymin = .data$mean_range_size - .data$sd_range_size,
-          ymax = .data$mean_range_size + .data$sd_range_size
+          ymin = .data$est_range_mean - .data$est_range_sd,
+          ymax = .data$est_range_mean + .data$est_range_sd
         ),
         size = .3
       )
