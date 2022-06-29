@@ -93,7 +93,7 @@ ppc_ <- function(y, yrep, all = FALSE, ...) {
     y <- y$data$sp_range_obs
     yrep <- yrep$BUGSoutput$sims.list$sp_range_rep
   } else {
-    y <- y$data$sp_range_mean
+    y <- y$data$sp_range
     yrep <- yrep$BUGSoutput$sims.list$alpha_site_rep
   }
   ppc(y, yrep, adjust = 2, ...)
