@@ -49,8 +49,8 @@ make_jags_output <- function(x, mdl_name, fit) {
     tbl_data <- tibble(
       settings_min,
       as_tibble(x$data[names(x$data) %in% x$settings$cols]),
-      mean_range_size = fit$BUGSoutput$mean$alpha,
-      sd_range_size = fit$BUGSoutput$sd$alpha
+      est_range_mean = fit$BUGSoutput$mean$alpha,
+      est_range_sd = fit$BUGSoutput$sd$alpha
     )
 
     if (length(clim_vars) == 1) {
