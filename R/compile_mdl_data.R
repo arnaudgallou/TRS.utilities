@@ -55,7 +55,7 @@ compile_mdl_data <- function(
 
   if (isTRUE(average)) {
     x <- group_by(x, .data$location) %>%
-      mutate(sp_range_mean = mean(.data$sp_range))
+      mutate(sp_range = mean(.data$sp_range))
 
     elev_grad_clim <- get_elev_grad_clim(x, clim_data)
 
@@ -165,7 +165,7 @@ rename_bioclim <- function(x) {
 get_elev_grad_clim <- function(x, clim_data) {
   x %>%
     distinct(.data$location, .keep_all = TRUE) %>%
-    select(matches("^(?:location|land_type|elev_span|sp_range_mean|past)")) %>%
+    select(matches("^(?:location|land_type|elev_span|sp_range|past)")) %>%
     left_join(clim_data, by = "location") %>%
     rowwise() %>%
     filter(between(.data$elev_band, .data$elev_span_min, .data$elev_span_max)) %>%
