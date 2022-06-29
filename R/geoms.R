@@ -83,6 +83,23 @@ ppc <- function(y, yrep, n_draws = 100, ...) {
 }
 
 
+#' @title Posterior predictive checks
+#' @description More specific variant of [`ppc()`] that will check posteriors from the global-scale analysis.
+#' @inheritParams ppc
+#' @param all If `TRUE`, will use all species ranges passed to [`run_jags()`]. Otherwise, will use species ranges averaged in each location.
+#' @export
+ppc_ <- function(y, yrep, all = FALSE, ...) {
+  if (all) {
+    y <- y$data$sp_range_obs
+    yrep <- yrep$BUGSoutput$sims.list$sp_range_rep
+  } else {
+    y <- y$data$sp_range_mean
+    yrep <- yrep$BUGSoutput$sims.list$alpha_site_rep
+  }
+  ppc(y, yrep, adjust = 2, ...)
+}
+
+
 #' @title Trace plots of MCMC draws
 #' @description Trace plots of MCMC draws.
 #' @param x A data frame.
