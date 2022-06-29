@@ -1,14 +1,15 @@
-setup_gis <- function () {
+setup_gis <- function() {
   proj <- "TRS.Rproj"
+  trs <- "data/trs.csv"
 
   if (!file.exists(proj)) {
-    stop('"setup_gis" must be executed in ', proj, ".")
+    stop('function "setup_gis" must be executed in ', proj, ".")
   }
-  if (!file.exists("data/trs.csv")) {
-    stop('"trs.csv" could not be found in "data".')
+  if (!file.exists(trs)) {
+    stop(basename(trs), ' could not be found in the "data" directory.')
   }
 
-  x <- read_csv("data/trs.csv", col_select = "location")
+  x <- read_csv(trs, col_select = "location")
   mountains <- unique(x$location)
 
   dir_data <- c(
