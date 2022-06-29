@@ -86,7 +86,7 @@ ppc <- function(y, yrep, n_draws = 100, ...) {
 #' @title Posterior predictive checks
 #' @description More specific variant of [`ppc()`] that will check posteriors from the global-scale analysis.
 #' @inheritParams ppc
-#' @param all If `TRUE`, will use all species ranges passed to [`run_jags()`]. Otherwise, will use species ranges averaged in each location.
+#' @param all If `TRUE`, will use all species ranges. Otherwise, will use species ranges averaged in each location.
 #' @export
 ppc_ <- function(y, yrep, all = FALSE, ...) {
   if (all) {

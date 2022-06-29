@@ -11,7 +11,7 @@ ppc_(y, yrep, all = FALSE, ...)
 
 \item{yrep}{Fitted data.}
 
-\item{all}{If \code{TRUE}, will use all species ranges passed to \code{\link[=run_jags]{run_jags()}}. Otherwise, will use species ranges averaged in each location.}
+\item{all}{If \code{TRUE}, will use all species ranges. Otherwise, will use species ranges averaged in each location.}
 
 \item{...}{Optional arguments passed on to \code{\link[bayesplot:PPC-distributions]{bayesplot::ppc_dens_overlay()}}.}
 }
