@@ -33,7 +33,7 @@ compile_mdl_data(
 
 \item{average}{Should species range sizes and climate data averaged?}
 
-\item{cols}{A vector of column names to select. Variables passed to \code{matrix_formula} will be automatically kept.}
+\item{cols}{A vector of column names to keep. Variables passed to \code{expr} will be automatically kept.}
 
 \item{rename_bioclim}{If \code{TRUE} (the default), will rename "bio1", "bio2", "bio4" and "bio12" as "mat", "dtr", "ts" and "ap", respectively.}
 

@@ -7,7 +7,7 @@
 #' @param singleton_thr Maximum proportion of single observations to filter location with.
 #' @param std_elev_grad Should elevational gradients be standardised?
 #' @param average Should species range sizes and climate data averaged?
-#' @param cols A vector of column names to select. Variables passed to `matrix_formula` will be automatically kept.
+#' @param cols A vector of column names to keep. Variables passed to `expr` will be automatically kept.
 #' @param rename_bioclim If `TRUE` (the default), will rename "bio1", "bio2", "bio4" and "bio12" as "mat", "dtr", "ts" and "ap", respectively.
 #' @param expr A character vector (for the local-scale analysis) or a formula (for the global-scale analysis) describing the predictor variable(s) to fit the model.
 #' @param std_from Edge on the elevational gradient to standardize from. One of `c("top", "bottom")`.
