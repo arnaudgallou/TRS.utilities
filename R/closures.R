@@ -102,7 +102,8 @@ global_analyses <- function(path) {
         ))
       ))
     } else {
-      x <- mutate(x, across(starts_with("y"), ~ .x * .01))
+      scales <- scales %||% .01
+      x <- mutate(x, across(starts_with("y"), ~ .x * scales))
     }
 
     x <- x %>% mutate(
@@ -134,8 +135,8 @@ global_analyses <- function(path) {
     reverse = TRUE,
     facet = TRUE
   ) {
-    if (!is.null(scales) & !(has_names(scales) & is.vector(scales))) {
-      stop("`scales` must be a named vector.")
+    if (length(scales) > 1 & !has_names(scales)) {
+      stop("`scales` must be a named vector if length > 1.")
     }
 
     if (isTRUE(facet)) {
