@@ -88,36 +88,21 @@ global_analyses <- function(path) {
     do.call(plot_regressions, c(list(data, fits), modifyList(args, list(...))))
   }
 
-  plot_posterior_distributions_ = function(
-    ...,
-    yvar,
-    prob = c(.8, .95),
-    outer_prob = 0.99,
-    scales,
-    param_names,
-    reverse = FALSE,
-    facet = TRUE
-  ) {
-    if (!(has_names(scales) & is.vector(scales))) {
-      stop("`scales` must be a named vector")
-    }
-
-    x <- .get_fls(...) %>%
-      .get_sims("span|zone|expl|beta_2") %>%
+  .make_posterior_data = function(x, yvar, prob, outer_prob, scales, param_names, reverse) {
+    x <- x %>%
       group_by(.data$expl_var, .data$elevation_span, .data$exclusion_zone) %>%
       add_posterior_density(.data$beta_2, prob, outer_prob) %>%
       ungroup()
 
-    if (missing(scales)) {
-      x <- mutate(x, across(starts_with("y"), ~ .x * .01))
-    } else {
+    if (!is.null(scales)) {
       x <- mutate(x, across(
         starts_with("y"),
-        ~ {
-          scales_expr <- ".data$expl_var == '{names(scales)}' ~ .x * {scales}"
-          case_when(!!!parse_exprs(glue(scales_expr)))
-        }
+        ~ case_when(!!!parse_exprs(
+          glue(".data$expl_var == '{names(scales)}' ~ .x * {scales}")
+        ))
       ))
+    } else {
+      x <- mutate(x, across(starts_with("y"), ~ .x * .01))
     }
 
     x <- x %>% mutate(
@@ -128,13 +113,29 @@ global_analyses <- function(path) {
       }
     )
 
-    if (!missing(param_names)) {
-      x <- mutate(
-        x,
+    if (!is.null(param_names)) {
+      x <- x %>% mutate(
         expl_var = .data$expl_var %>%
           string_replace_all(param_names) %>%
           factor(levels = param_names)
       )
+    }
+
+    x
+  }
+
+  plot_posterior_distributions_ = function(
+    ...,
+    yvar,
+    prob = c(.8, .95),
+    outer_prob = 0.99,
+    scales = NULL,
+    param_names = NULL,
+    reverse = TRUE,
+    facet = TRUE
+  ) {
+    if (!is.null(scales) & !(has_names(scales) & is.vector(scales))) {
+      stop("`scales` must be a named vector.")
     }
 
     if (isTRUE(facet)) {
@@ -153,7 +154,9 @@ global_analyses <- function(path) {
       color <- rep("#1F4C7A", 3)
     }
 
-    x %>%
+    .get_fls(...) %>%
+      .get_sims("span|zone|expl|beta_2") %>%
+      .make_posterior_data(yvar, prob, outer_prob, scales, param_names, reverse) %>%
       posterior_dist(
         aes(
           .data$x,
