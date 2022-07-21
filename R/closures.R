@@ -94,7 +94,7 @@ global_analyses <- function(path) {
       add_posterior_density(.data$beta_2, prob, outer_prob) %>%
       ungroup()
 
-    if (!is.null(scales)) {
+    if (!is.null(scales) & length(scales) > 1) {
       x <- mutate(x, across(
         starts_with("y"),
         ~ case_when(!!!parse_exprs(
