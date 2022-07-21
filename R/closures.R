@@ -62,6 +62,7 @@ global_analyses <- function(path) {
   }
 
   plot_regressions_ = function(
+    vars,
     elevation_span,
     exclusion_zone,
     std_from = c("top", "bottom"),
@@ -71,7 +72,7 @@ global_analyses <- function(path) {
   ) {
     type <- match.arg(type)
     is_land_type <- type == "land_type"
-    vars <- if (is_land_type) type else "dtr|ts|dmat"
+    vars <- if (is_land_type) type else vars
     get_nm <- function(x) if (is_land_type) string_replace(basename(x), "_land.+", "") else NULL
     fls <- .get_fls(
       vars,
