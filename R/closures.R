@@ -90,10 +90,12 @@ global_analyses <- function(path) {
 
   plot_posterior_distributions_ = function(
     ...,
+    yvar,
     prob = c(.8, .95),
     outer_prob = 0.99,
     scale,
     param_names,
+    reverse = FALSE,
     facet = TRUE
   ) {
     if (missing(scale)) scale <- .2
@@ -108,7 +110,11 @@ global_analyses <- function(path) {
           .data$expl_var == "ts" ~ .x * .018,
           TRUE ~ .x * scale
         )),
-        exclusion_zone = factor(.data$exclusion_zone)
+        "{yvar}" := {
+          yvar_unique <- unique(.data[[yvar]])
+          yvar_levels <- if (reverse) rev(yvar_unique) else yvar_unique
+          factor(.data[[yvar]], levels = yvar_levels)
+        }
       )
 
     if (!missing(param_names)) {
@@ -140,10 +146,10 @@ global_analyses <- function(path) {
       posterior_dist(
         aes(
           .data$x,
-          .data$exclusion_zone,
+          .data[[yvar]],
           height = .data$y,
-          color = .data$exclusion_zone,
-          fill = .data$exclusion_zone
+          color = .data[[yvar]],
+          fill = .data[[yvar]]
         ),
         vline_color = "grey70",
         vline_type = 2,
