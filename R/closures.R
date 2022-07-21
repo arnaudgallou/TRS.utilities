@@ -93,29 +93,40 @@ global_analyses <- function(path) {
     yvar,
     prob = c(.8, .95),
     outer_prob = 0.99,
-    scale,
+    scales,
     param_names,
     reverse = FALSE,
     facet = TRUE
   ) {
-    if (missing(scale)) scale <- .2
+    if (!(has_names(scales) & is.vector(scales))) {
+      stop("`scales` must be a named vector")
+    }
+
     x <- .get_fls(...) %>%
       .get_sims("span|zone|expl|beta_2") %>%
       group_by(.data$expl_var, .data$elevation_span, .data$exclusion_zone) %>%
       add_posterior_density(.data$beta_2, prob, outer_prob) %>%
-      ungroup() %>%
-      mutate(
-        across(starts_with("y"), ~ case_when(
-          .data$expl_var == "dtr" ~ .x * .013,
-          .data$expl_var == "ts" ~ .x * .018,
-          TRUE ~ .x * scale
-        )),
-        "{yvar}" := {
-          yvar_unique <- unique(.data[[yvar]])
-          yvar_levels <- if (reverse) rev(yvar_unique) else yvar_unique
-          factor(.data[[yvar]], levels = yvar_levels)
+      ungroup()
+
+    if (missing(scales)) {
+      x <- mutate(x, across(starts_with("y"), ~ .x * .01))
+    } else {
+      x <- mutate(x, across(
+        starts_with("y"),
+        ~ {
+          scales_expr <- ".data$expl_var == '{names(scales)}' ~ .x * {scales}"
+          case_when(!!!parse_exprs(glue(scales_expr)))
         }
-      )
+      ))
+    }
+
+    x <- x %>% mutate(
+      "{yvar}" := {
+        yvar_unique <- unique(.data[[yvar]])
+        yvar_levels <- if (reverse) rev(yvar_unique) else yvar_unique
+        factor(.data[[yvar]], levels = yvar_levels)
+      }
+    )
 
     if (!missing(param_names)) {
       x <- mutate(
