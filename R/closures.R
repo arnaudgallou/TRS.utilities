@@ -167,13 +167,7 @@ global_analyses <- function(path) {
         ),
         vline_color = "grey70",
         vline_type = 2,
-        facet_args = list(
-          rows = vars(.data$elevation_span),
-          cols = vars(.data$expl_var),
-          scales = "free_x",
-          switch = "y",
-          labeller = label_parsed
-        )
+        facet_args = facet_args
       ) +
       scale_fill_manual(values = fill) +
       scale_color_manual(values = color) +
