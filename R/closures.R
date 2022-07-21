@@ -93,7 +93,8 @@ global_analyses <- function(path) {
     prob = c(.8, .95),
     outer_prob = 0.99,
     scale,
-    param_names
+    param_names,
+    facet = TRUE
   ) {
     if (missing(scale)) scale <- .2
     x <- .get_fls(...) %>%
@@ -119,6 +120,22 @@ global_analyses <- function(path) {
       )
     }
 
+    if (isTRUE(facet)) {
+      facet_args <- list(
+        rows = vars(.data$elevation_span),
+        cols = vars(.data$expl_var),
+        scales = "free_x",
+        switch = "y",
+        labeller = label_parsed
+      )
+      fill <- c("#5E8CBA", "#CB624D", "#F5B83D")
+      color <- c("#1F4C7A", "#8F3624", "#915F08")
+    } else {
+      facet_args <- list()
+      fill <- rep("#5E8CBA", 3)
+      color <- rep("#1F4C7A", 3)
+    }
+
     x %>%
       posterior_dist(
         aes(
@@ -138,8 +155,8 @@ global_analyses <- function(path) {
           labeller = label_parsed
         )
       ) +
-      scale_fill_manual(values = c("#5E8CBA", "#CB624D", "#F5B83D")) +
-      scale_color_manual(values = c("#1F4C7A", "#8F3624", "#915F08")) +
+      scale_fill_manual(values = fill) +
+      scale_color_manual(values = color) +
       xlab("Posterior parameter estimates") +
       theme_blank_y() +
       theme(strip.placement = "outside")
