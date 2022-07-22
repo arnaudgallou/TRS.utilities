@@ -62,7 +62,7 @@ global_analyses <- function(path) {
   }
 
   plot_regressions_ = function(
-    vars,
+    vars = "dtr|ts|dmat",
     elevation_span,
     exclusion_zone,
     std_from = c("top", "bottom"),
@@ -132,7 +132,7 @@ global_analyses <- function(path) {
     outer_prob = 0.99,
     scales = NULL,
     param_names = NULL,
-    reverse = TRUE,
+    reverse = FALSE,
     facet = TRUE
   ) {
     if (length(scales) > 1 & !has_names(scales)) {
