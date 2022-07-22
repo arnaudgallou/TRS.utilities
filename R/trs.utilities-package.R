@@ -12,4 +12,5 @@
 #' @importFrom glue glue
 #' @importFrom toolkit has_metachr has_names sniff_dfs round_nearest proportion standardize parse_formula parse_num make_dir make_list delta string_replace string_replace_all string_extract string_extract_all string_strip string_clean uc_first first_word to_snake_case vec_to_chr_class list_files extract_file_name line_0 theme_elesic theme_blank_y assign_to_missing round_num
 #' @importFrom utils modifyList
+#' @importFrom colorspace darken
 "_PACKAGE"
