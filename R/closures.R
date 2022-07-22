@@ -158,6 +158,9 @@ global_analyses <- function(path) {
     facet = TRUE,
     fill = NULL
   ) {
+    if (missing(yvar)) {
+      stop("argument `yvar` is missing with no default.")
+    }
     if (length(scales) > 1 & !has_names(scales)) {
       stop("`scales` must be a named vector if length > 1.")
     }
