@@ -33,4 +33,5 @@ Imports:
     terra,
     bayesplot,
     modelr,
-    utils
+    utils,
+    colorspace
