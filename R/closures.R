@@ -257,8 +257,7 @@ local_analyses <- function(path) {
     .get_data(exclusion_zone) %>%
       mutate(
         parameter = first_word(.data$parameter),
-        y = .data$mean / .data$sd,
-        expl_var = toupper(.data$expl_var) %>% factor(c("TS", "DTR"))
+        y = .data$mean / .data$sd
       ) %>%
       left_join(location_elev_span, by = "rowid") %>%
       ggplot(aes(
