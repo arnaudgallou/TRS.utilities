@@ -133,7 +133,8 @@ global_analyses <- function(path) {
     scales = NULL,
     param_names = NULL,
     reverse = FALSE,
-    facet = TRUE
+    facet = TRUE,
+    fill = NULL
   ) {
     if (length(scales) > 1 & !has_names(scales)) {
       stop("`scales` must be a named vector if length > 1.")
@@ -147,17 +148,17 @@ global_analyses <- function(path) {
         switch = "y",
         labeller = label_parsed
       )
-      fill <- c("#5E8CBA", "#CB624D", "#F5B83D")
-      color <- c("#1F4C7A", "#8F3624", "#915F08")
     } else {
       facet_args <- list()
-      fill <- rep("#5E8CBA", 3)
-      color <- rep("#1F4C7A", 3)
     }
 
-    .get_fls(...) %>%
+    x <- .get_fls(...) %>%
       .get_sims("span|zone|expl|beta_2") %>%
-      .make_posterior_data(yvar, prob, outer_prob, scales, param_names, reverse) %>%
+      .make_posterior_data(yvar, prob, outer_prob, scales, param_names, reverse)
+
+    fill <- fill %||% rep("#5E8CBA", length(unique(x[[yvar]])))
+
+    x %>%
       posterior_dist(
         aes(
           .data$x,
@@ -171,7 +172,7 @@ global_analyses <- function(path) {
         facet_args = facet_args
       ) +
       scale_fill_manual(values = fill) +
-      scale_color_manual(values = color) +
+      scale_color_manual(values = darken(fill, .5, "HLS")) +
       xlab("Posterior parameter estimates") +
       theme_blank_y() +
       theme(strip.placement = "outside")
