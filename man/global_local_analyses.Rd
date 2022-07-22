@@ -16,3 +16,29 @@ local_analyses(path)
 \description{
 Closures to plot model estimates and get model statistics.
 }
+\details{
+Usage of \code{...} varies depending on methods:
+\itemize{
+\item in \code{plot_regressions_()}, \code{...} takes optional arguments passed to \code{\link{plot_regressions}}.
+\item in other methods, \code{...} takes the following optional arguments to select files: \code{vars}, \code{elevation_span}, \code{exclusion_zone} and \code{std_from}.
+}
+}
+\examples{
+\dontrun{
+
+# Global scale analyses
+ga <- global_analyses(path)
+
+ga$plot_regressions_(elevation_span = 2500)
+
+ga$plot_posterior_distributions_(
+  vars = "dtr|ts",
+  yvar = "exclusion_zone"
+)
+
+# Local scale analyses
+gl <- local_analyses(path)
+
+gl$plot_slope_histogram_()
+}
+}

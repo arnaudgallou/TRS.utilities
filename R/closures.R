@@ -1,6 +1,28 @@
 #' @title Global- and local-scale analyses
 #' @description Closures to plot model estimates and get model statistics.
 #' @param path Path to a directory containing model objects returned by [`run_jags()`].
+#' @details
+#' Usage of `...` varies depending on methods:
+#' - in `plot_regressions_()`, `...` takes optional arguments passed to [`plot_regressions`].
+#' - in other methods, `...` takes the following optional arguments to select files: `vars`, `elevation_span`, `exclusion_zone` and `std_from`.
+#' @examples
+#' \dontrun{
+#'
+#' # Global scale analyses
+#' ga <- global_analyses(path)
+#'
+#' ga$plot_regressions_(elevation_span = 2500)
+#'
+#' ga$plot_posterior_distributions_(
+#'   vars = "dtr|ts",
+#'   yvar = "exclusion_zone"
+#' )
+#'
+#' # Local scale analyses
+#' gl <- local_analyses(path)
+#'
+#' gl$plot_slope_histogram_()
+#' }
 #' @name global_local_analyses
 NULL
 
