@@ -95,13 +95,13 @@ global_analyses <- function(path) {
     type <- match.arg(type)
     is_land_type <- type == "land_type"
     vars <- if (is_land_type) type else vars
-    get_nm <- function(x) if (is_land_type) string_replace(basename(x), "_land.+", "") else NULL
+    names <- if (is_land_type) function(x) str_remove(basename(x), "_land.+") else NULL
     fls <- .get_fls(
       vars,
       elevation_span,
       exclusion_zone,
       match.arg(std_from),
-      get_nm,
+      names,
       parent_frame = 3
     )
     data <- .get_data(fls, .id = if (is_land_type) "expl_clim")
@@ -116,16 +116,16 @@ global_analyses <- function(path) {
       add_posterior_density(.data$beta_2, prob, outer_prob) %>%
       ungroup()
 
-    if (!is.null(scales) & length(scales) > 1) {
-      x <- mutate(x, across(
-        starts_with("y"),
-        ~ case_when(!!!parse_exprs(
-          glue(".data$expl_var == '{names(scales)}' ~ .x * {scales}")
+    if (!is.null(scales)) {
+      if (length(scales) > 1) {
+        .f <- expr(~ case_when(
+          !!!parse_exprs(glue(".data$expl_var == '{names(scales)}' ~ .x * {scales}"))
         ))
-      ))
-    } else {
-      scales <- scales %||% .01
-      x <- mutate(x, across(starts_with("y"), ~ .x * scales))
+      } else {
+        scales <- scales %||% .01
+        .f <- expr(~ .x * scales)
+      }
+      x <- mutate(x, across(starts_with("y"), !!.f))
     }
 
     x <- x %>% mutate(
