@@ -19,9 +19,9 @@
 #' )
 #'
 #' # Local scale analyses
-#' gl <- local_analyses(path)
+#' la <- local_analyses(path)
 #'
-#' gl$plot_slope_histogram_()
+#' la$plot_slope_histogram_()
 #' }
 #' @name global_local_analyses
 NULL
