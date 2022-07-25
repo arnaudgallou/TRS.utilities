@@ -123,7 +123,7 @@ global_analyses <- function(path) {
         ))
       } else {
         scales <- scales %||% .01
-        .f <- expr(~ .x * scales)
+        .f <- ~ .x * scales
       }
       x <- mutate(x, across(starts_with("y"), !!.f))
     }
