@@ -95,13 +95,12 @@ global_analyses <- function(path) {
     type <- match.arg(type)
     is_land_type <- type == "land_type"
     vars <- if (is_land_type) type else vars
-    names <- if (is_land_type) function(x) str_remove(basename(x), "_land.+") else NULL
     fls <- .get_fls(
       vars,
       elevation_span,
       exclusion_zone,
       match.arg(std_from),
-      names,
+      names = ~ if (is_land_type) str_remove(basename(x), "_land.+"),
       parent_frame = 3
     )
     data <- .get_data(fls, .id = if (is_land_type) "expl_clim")
