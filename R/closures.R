@@ -115,17 +115,14 @@ global_analyses <- function(path) {
       add_posterior_density(.data$beta_2, prob, outer_prob) %>%
       ungroup()
 
-    if (!is.null(scales)) {
-      if (length(scales) > 1) {
-        .f <- expr(~ case_when(
-          !!!parse_exprs(glue(".data$expl_var == '{names(scales)}' ~ .x * {scales}"))
-        ))
-      } else {
-        scales <- scales %||% .01
-        .f <- ~ .x * scales
-      }
-      x <- mutate(x, across(starts_with("y"), !!.f))
+    if (length(scales) > 1) {
+      .f <- expr(~ case_when(
+        !!!parse_exprs(glue(".data$expl_var == '{names(scales)}' ~ .x * {scales}"))
+      ))
+    } else {
+      .f <- ~ .x * scales
     }
+    x <- mutate(x, across(starts_with("y"), !!.f))
 
     x <- x %>% mutate(
       "{yvar}" := {
@@ -151,7 +148,7 @@ global_analyses <- function(path) {
     yvar,
     prob = c(.8, .95),
     outer_prob = 0.99,
-    scales = NULL,
+    scales = .01,
     param_names = NULL,
     reverse = FALSE,
     facet = TRUE,
