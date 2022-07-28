@@ -122,9 +122,9 @@ global_analyses <- function(path) {
     } else {
       .f <- ~ .x * scales
     }
-    x <- mutate(x, across(starts_with("y"), !!.f))
 
     x <- x %>% mutate(
+      across(starts_with("y"), !!.f),
       "{yvar}" := {
         yvar_unique <- unique(.data[[yvar]])
         yvar_levels <- if (reverse) rev(yvar_unique) else yvar_unique
