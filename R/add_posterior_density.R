@@ -13,7 +13,8 @@ add_posterior_density <- function(x, estimates, prob, outer_prob = .99) {
   x <- left_join(
     add_hdi(x, {{estimates}}, prob, outer_prob = outer_prob),
     add_density(x, {{estimates}}, median, mean),
-    by = groups
+    by = groups,
+    multiple = "all"
   )
 
   probs <- c(prob, outer_prob)
