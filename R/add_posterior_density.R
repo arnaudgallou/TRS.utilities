@@ -5,84 +5,66 @@
 #' @param prob The probability mass to include in the shaded region.
 #' @param outer_prob The probability mass to include in the outer interval.
 #' @export
-add_posterior_density <- function(x, estimates, prob, outer_prob = .99) {
-  x <- add_averages(x, {{estimates}})
-
-  groups <- group_vars(x)
-
-  x <- left_join(
-    add_hdi(x, {{estimates}}, prob, outer_prob = outer_prob),
-    add_density(x, {{estimates}}, median, mean),
+add_posterior_density <- function(data, estimates, prob, outer_prob = .99) {
+  out <- add_averages(data, {{estimates}})
+  groups <- group_vars(out)
+  out <- left_join(
+    add_hdi(out, {{estimates}}, prob, outer_prob),
+    add_density(out, {{estimates}}, median, mean),
     by = groups,
     multiple = "all"
   )
-
   probs <- c(prob, outer_prob)
-  x <- map_df(
-    probs,
-    ~ filter_cred_interval(x, .x),
-    .id = "ci_id"
+  out <- map(probs, \(prob) filter_cred_interval(out, prob))
+  out <- list_rbind(out, names_to = "ci_id")
+  coords <- summarize(
+    out,
+    xmin = min(.data$x),
+    xmax = max(.data$x),
+    ymax = max(.data$y),
+    .by = all_of(groups)
   )
-
-  coords <- x %>%
-    group_by(across(all_of(groups))) %>%
-    summarize(
-      xmin = min(.data$x),
-      xmax = max(.data$x),
-      ymax = max(.data$y),
-      .groups = "drop"
-    )
-
-  left_join(x, coords, by = groups)
+  left_join(out, coords, by = groups)
 }
 
-
-add_averages <- function(x, var) {
+add_averages <- function(data, var) {
   mutate(
-    x,
+    data,
     median = median({{var}}, na.rm = TRUE),
     mean = mean({{var}}, na.rm = TRUE)
   )
 }
 
-
 # ... Variables to keep in the nested tibble.
-add_density <- function(x, estimates, ...) {
-  x %>%
-    group_by(..., .add = TRUE) %>%
-    nest() %>%
-    mutate(density = map(
-      .data$data,
-      ~ .x %>%
-        pull({{estimates}}) %>%
-        density() %>%
-        (function(den) {
-          tibble(x = den$x, y = den$y)
-        })()
-    )) %>%
-    select(-.data$data) %>%
-    unnest(.data$density)
+add_density <- function(data, estimates, ...) {
+  out <- group_by(data, ..., .add = TRUE)
+  out <- nest(out)
+  out <- mutate(out, density = map(.data$data, \(.x) {
+    this <- pull(.x, {{estimates}})
+    this <- density(this)
+    tibble(x = this$x, y = this$y)
+  }))
+  out <- select(out, -.data$data)
+  unnest(out, .data$density)
 }
 
-
-add_hdi <- function(x, estimates, prob, outer_prob = .99) {
+add_hdi <- function(data, estimates, prob, outer_prob = .99) {
   probs <- c(prob, outer_prob)
-  x %>%
-    summarize(
-      ci = list(bayestestR::hdi({{estimates}}, ci = probs)),
-      .groups = "keep"
-    ) %>%
-    unnest(.data$ci) %>%
-    clean_names()
+  out <- summarize(
+    data,
+    ci = list(bayestestR::hdi({{estimates}}, ci = probs)),
+    .groups = "keep"
+  )
+  out <- unnest(out, .data$ci)
+  clean_names(out)
 }
 
-
-filter_cred_interval <- function(x, cred_interval) {
-  x %>%
-    rowwise() %>%
-    filter(
-      .data$ci == cred_interval,
-      between(.data$x, .data$ci_low, .data$ci_high)
-    ) %>%
-    ungroup()
+filter_cred_interval <- function(data, cred_interval) {
+  out <- rowwise(data)
+  out <- filter(
+    out,
+    .data$ci == cred_interval,
+    between(.data$x, .data$ci_low, .data$ci_high)
+  )
+  ungroup(out)
 }
