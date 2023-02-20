@@ -1,7 +1,9 @@
-#' @title Compute the Kernel density estimates and highest density interval of posterior distributions
-#' @description Add the Kernel density estimates and highest density interval of posterior distributions to a data frame prior using [`posterior_dist()`].
-#' @param x A data frame.
-#' @param estimates Column of posterior distributions.
+#' @title Compute the Kernel density estimates and highest density interval of
+#'   posterior distributions
+#' @description Add the Kernel density estimates and highest density interval of
+#'   posterior distributions to a data frame prior to using [`posterior_dist()`].
+#' @param data A data frame.
+#' @param estimates Variable containing posterior distributions.
 #' @param prob The probability mass to include in the shaded region.
 #' @param outer_prob The probability mass to include in the outer interval.
 #' @export

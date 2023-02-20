@@ -2,19 +2,21 @@
 % Please edit documentation in R/add_posterior_density.R
 \name{add_posterior_density}
 \alias{add_posterior_density}
-\title{Compute the Kernel density estimates and highest density interval of posterior distributions}
+\title{Compute the Kernel density estimates and highest density interval of
+posterior distributions}
 \usage{
-add_posterior_density(x, estimates, prob, outer_prob = 0.99)
+add_posterior_density(data, estimates, prob, outer_prob = 0.99)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{data}{A data frame.}
 
-\item{estimates}{Column of posterior distributions.}
+\item{estimates}{Variable containing posterior distributions.}
 
 \item{prob}{The probability mass to include in the shaded region.}
 
 \item{outer_prob}{The probability mass to include in the outer interval.}
 }
 \description{
-Add the Kernel density estimates and highest density interval of posterior distributions to a data frame prior using \code{\link[=posterior_dist]{posterior_dist()}}.
+Add the Kernel density estimates and highest density interval of
+posterior distributions to a data frame prior to using \code{\link[=posterior_dist]{posterior_dist()}}.
 }
