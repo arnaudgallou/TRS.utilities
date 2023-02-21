@@ -1,7 +1,9 @@
 #' @importFrom loo waic loo relative_eff
 #' @title Evaluate JAGS models
-#' @description Compare multiple JAGS models using the WAIC and leave-one-out (LOO) cross-validation methods.
-#' @param files Path of files containing a JAGS model object returned by [`run_jags()`].
+#' @description Compare multiple JAGS models using the WAIC and leave-one-out
+#'   (LOO) cross-validation methods.
+#' @param files Path of files containing a JAGS model object returned by
+#'   [`run_jags()`].
 #' @return A tibble of WAIC and LOO IC estimates with standard error.
 #' @export
 eval_models <- function(files) {

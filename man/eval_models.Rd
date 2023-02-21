@@ -7,11 +7,13 @@
 eval_models(files)
 }
 \arguments{
-\item{files}{Path of files containing a JAGS model object returned by \code{\link[=run_jags]{run_jags()}}.}
+\item{files}{Path of files containing a JAGS model object returned by
+\code{\link[=run_jags]{run_jags()}}.}
 }
 \value{
 A tibble of WAIC and LOO IC estimates with standard error.
 }
 \description{
-Compare multiple JAGS models using the WAIC and leave-one-out (LOO) cross-validation methods.
+Compare multiple JAGS models using the WAIC and leave-one-out
+(LOO) cross-validation methods.
 }
