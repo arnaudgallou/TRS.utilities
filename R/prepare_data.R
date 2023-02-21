@@ -22,10 +22,12 @@ calc_pred_conf <- function(files) {
     fit <- get_jags_sims(data, "beta")
     out <- pluck(data, "elev_grad_clim")
     out <- group_by(out, land_type)
-    out <- modelr::data_grid(
-      out,
-      value = modelr::seq_range(.data[[expl_var]], n = 100),
-      expl_var = expl_var
+    suppressWarnings(
+      out <- modelr::data_grid(
+        out,
+        value = modelr::seq_range(.data[[expl_var]], n = 100),
+        expl_var = expl_var
+      )
     )
     out <- ungroup(out)
     add_pred_conf(out, fit, formula = ~ value * land_type)
