@@ -10,19 +10,22 @@ read_jags(x, pluck, vars = NULL, ...)
 
 \method{read_jags}{character}(x, pluck, vars = NULL, ...)
 
-\method{read_jags}{collection}(x, pluck, vars = NULL, ..., .id = NULL)
+\method{read_jags}{collection}(x, pluck, vars = NULL, ..., names_to = NULL)
 }
 \arguments{
 \item{x}{A \code{.rds} file or a collection of \code{.rds} files.}
 
 \item{pluck}{Object to be extracted from a JAGS output.}
 
-\item{vars}{Columns to select or model parameters to filter from the \code{sims} or \code{summary} data, respectively.}
+\item{vars}{Columns to select or model parameters to filter from the \code{sims}
+or \code{summary} data, respectively.}
 
 \item{...}{Arguments passed on to methods.}
 
-\item{.id}{Either a string or \code{NULL}. See \code{\link[purrr:map]{purrr::map_df()}} for details.}
+\item{names_to}{Either a string or \code{NULL}. See \code{\link[purrr:list_c]{purrr::list_rbind()}} for
+details.}
 }
 \description{
-Read model object files returned by \code{\link[=run_jags]{run_jags()}}. Requires running \code{run_jags()} with \code{save=TRUE} and \code{default_output=FALSE}.
+Read model object files returned by \code{\link[=run_jags]{run_jags()}}. Requires
+running \code{run_jags()} with \code{save=TRUE} and \code{default_output = FALSE}.
 }

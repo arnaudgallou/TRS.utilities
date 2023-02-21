@@ -1,10 +1,13 @@
 #' @title Read JAGS custom output files
-#' @description Read model object files returned by [`run_jags()`]. Requires running `run_jags()` with `save=TRUE` and `default_output=FALSE`.
+#' @description Read model object files returned by [`run_jags()`]. Requires
+#'   running `run_jags()` with `save=TRUE` and `default_output = FALSE`.
 #' @param x A `.rds` file or a collection of `.rds` files.
 #' @param pluck Object to be extracted from a JAGS output.
-#' @param vars Columns to select or model parameters to filter from the `sims` or `summary` data, respectively.
+#' @param vars Columns to select or model parameters to filter from the `sims`
+#'   or `summary` data, respectively.
 #' @param ... Arguments passed on to methods.
-#' @param .id Either a string or `NULL`. See [`purrr::map_df()`] for details.
+#' @param names_to Either a string or `NULL`. See [`purrr::list_rbind()`] for
+#'   details.
 #' @export
 read_jags <- function(x, pluck, vars = NULL, ...) {
   UseMethod("read_jags")
