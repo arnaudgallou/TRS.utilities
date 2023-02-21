@@ -36,7 +36,7 @@ regressions <- function(data, labels, ...) {
 #' @param point_labels Should point labels be shown?
 #' @param seed Seed value for draw sampling.
 #' @export
-plot_regressions.draws <- function(
+regressions.draws <- function(
     data,
     labels,
     ...,
