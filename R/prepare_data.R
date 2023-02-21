@@ -13,7 +13,7 @@ make_regression_data <- function(files, type = c("draws", "land_types")) {
     read_jags(files, item, .id = if (type == "land_types") "expl_var")
   })
   out <- set_names(out, items)
-  structure(out, class = c(type, "tbl_df"))
+  structure(out, class = c(type, "list"))
 }
 
 calc_pred_conf <- function(files) {
