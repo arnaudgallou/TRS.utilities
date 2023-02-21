@@ -25,9 +25,11 @@ run_jags(
 
 \item{path}{Directory to save the file in.}
 
-\item{filename}{Name (without extension) of the file. Leave \code{filename=NULL} to use a default file name based on the model settings.}
+\item{filename}{Name (without extension) of the file. Leave \code{filename=NULL}
+to use a default file name based on the model settings.}
 
-\item{default_output}{Should \code{run_jags()} return the model object returned by \code{\link[R2jags:jags]{R2jags::jags()}}?}
+\item{default_output}{Should \code{run_jags()} return the model object returned by
+\code{\link[R2jags:jags]{R2jags::jags()}}?}
 }
 \description{
 Run a JAGS model.

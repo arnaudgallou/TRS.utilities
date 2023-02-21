@@ -5,8 +5,10 @@
 #' @param ... Other arguments to pass on to [`R2jags::jags()`].
 #' @param save Should the JAGS output be saved?
 #' @param path Directory to save the file in.
-#' @param filename Name (without extension) of the file. Leave `filename=NULL` to use a default file name based on the model settings.
-#' @param default_output Should `run_jags()` return the model object returned by [`R2jags::jags()`]?
+#' @param filename Name (without extension) of the file. Leave `filename=NULL`
+#'   to use a default file name based on the model settings.
+#' @param default_output Should `run_jags()` return the model object returned by
+#'   [`R2jags::jags()`]?
 #' @export
 run_jags <- function(
     x,
