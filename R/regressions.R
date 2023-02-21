@@ -1,7 +1,7 @@
 #' @title Plot regression fits
 #' @description Plot regression fits.
-#' @param data A list of data produces by [`regression_data()`].
-#' @param labels A character vector use to label the x axis. If `labels` contains
+#' @param data A list of data produced by [`regression_data()`].
+#' @param labels A character vector used to label the x axis. If `labels` contains
 #'   several labels, each label must be named. Names must be the same as the
 #'   explanatory variables.
 #' @export

@@ -2,13 +2,13 @@
 % Please edit documentation in R/regressions.R
 \name{regressions}
 \alias{regressions}
-\alias{plot_regressions.draws}
+\alias{regressions.draws}
 \alias{regressions.land_types}
 \title{Plot regression fits}
 \usage{
 regressions(data, labels, ...)
 
-plot_regressions.draws(
+\method{regressions}{draws}(
   data,
   labels,
   ...,
@@ -21,9 +21,9 @@ plot_regressions.draws(
 \method{regressions}{land_types}(data, labels, ...)
 }
 \arguments{
-\item{data}{A list of data produces by \code{\link[=regression_data]{regression_data()}}.}
+\item{data}{A list of data produced by \code{\link[=regression_data]{regression_data()}}.}
 
-\item{labels}{A character vector use to label the x axis. If \code{labels} contains
+\item{labels}{A character vector used to label the x axis. If \code{labels} contains
 several labels, each label must be named. Names must be the same as the
 explanatory variables.}
 
