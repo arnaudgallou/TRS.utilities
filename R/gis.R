@@ -77,7 +77,8 @@ rs_ext_to_polygon <- function(x) {
 
 
 #' @title Set the minimum and maximum values of a raster object
-#' @description Remove missing values and set the minimum and maximum values of a raster object.
+#' @description Remove missing values and set the minimum and maximum values of
+#'   a raster object.
 #' @param x A raster object.
 #' @export
 rs_set_range <- function(x) {
@@ -90,7 +91,8 @@ rs_set_range <- function(x) {
 #' @description Divide values of a DEM object into bins of a given width.
 #' @param x A raster object.
 #' @param binwidth The width of the bins.
-#' @param right Should bin intervals be closed on the right? See [`terra::classify()`] for details.
+#' @param right Should bin intervals be closed on the right?
+#'   See [`terra::classify()`] for details.
 #' @export
 rs_reclass_dem <- function(x, binwidth = 100, right = FALSE) {
   min <- round_nearest(terra::minmax(x)[1], -binwidth)
@@ -105,7 +107,8 @@ rs_reclass_dem <- function(x, binwidth = 100, right = FALSE) {
 #' @title Read a multi-layer raster file
 #' @description Read a multi-layer raster file.
 #' @param file A file containing a raster stack.
-#' @param layer_names A character vector containing the names to assign to each raster layer.
+#' @param layer_names A character vector containing the names to assign to each
+#'   raster layer.
 #' @export
 rs_read_stk <- function(file, layer_names = NULL) {
   x <- terra::rast(file)
@@ -125,7 +128,8 @@ rs_set_crs <- function(x, proj = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs
 
 
 #' @title Subset values from a raster object
-#' @description Wrapper around [`terra::mask()`] to subset values from a raster object.
+#' @description Wrapper around [`terra::mask()`] to subset values from a raster
+#'   object.
 #' @param x A raster object.
 #' @param ... Expression that returns a logical value.
 #' @export

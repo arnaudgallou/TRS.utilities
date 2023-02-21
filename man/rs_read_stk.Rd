@@ -9,7 +9,8 @@ rs_read_stk(file, layer_names = NULL)
 \arguments{
 \item{file}{A file containing a raster stack.}
 
-\item{layer_names}{A character vector containing the names to assign to each raster layer.}
+\item{layer_names}{A character vector containing the names to assign to each
+raster layer.}
 }
 \description{
 Read a multi-layer raster file.

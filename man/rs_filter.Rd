@@ -12,5 +12,6 @@ rs_filter(x, ...)
 \item{...}{Expression that returns a logical value.}
 }
 \description{
-Wrapper around \code{\link[terra:mask]{terra::mask()}} to subset values from a raster object.
+Wrapper around \code{\link[terra:mask]{terra::mask()}} to subset values from a raster
+object.
 }

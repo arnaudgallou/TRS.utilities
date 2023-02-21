@@ -10,5 +10,6 @@ rs_set_range(x)
 \item{x}{A raster object.}
 }
 \description{
-Remove missing values and set the minimum and maximum values of a raster object.
+Remove missing values and set the minimum and maximum values of
+a raster object.
 }

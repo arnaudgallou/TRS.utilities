@@ -11,7 +11,8 @@ rs_reclass_dem(x, binwidth = 100, right = FALSE)
 
 \item{binwidth}{The width of the bins.}
 
-\item{right}{Should bin intervals be closed on the right? See \code{\link[terra:classify]{terra::classify()}} for details.}
+\item{right}{Should bin intervals be closed on the right?
+See \code{\link[terra:classify]{terra::classify()}} for details.}
 }
 \description{
 Divide values of a DEM object into bins of a given width.
