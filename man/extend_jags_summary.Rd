@@ -10,5 +10,8 @@ extend_jags_summary(x)
 \item{x}{A data frame.}
 }
 \description{
-Add standardized slope estimates and whether the 95\\% credible interval (CI) includes 0 or not to a JAGS summary. A value of 1 indicates that the CI includes 0, a value of 0 indicates that the CI does not include 0. Requires running \code{\link[=run_jags]{run_jags()}} with \code{default_output=FALSE}.
+Add standardized slope estimates and whether the 95\\% credible
+interval (CI) includes 0 or not to a JAGS summary. A value of 1 indicates
+that the CI includes 0, a value of 0 indicates that the CI does not include
+0. Requires running \code{\link[=run_jags]{run_jags()}} with \code{default_output=FALSE}.
 }

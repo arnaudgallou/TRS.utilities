@@ -10,5 +10,7 @@ summarize_slopes(x)
 \item{x}{A data frame.}
 }
 \description{
-Compute the proportion of positive and negative slopes in a data frame returned by \code{\link[=extend_jags_summary]{extend_jags_summary()}}. High and low uncertainties indicate that the 95\\% CI includes 0 or not, respectively.
+Compute the proportion of positive and negative slopes in a data
+frame returned by \code{\link[=extend_jags_summary]{extend_jags_summary()}}. High and low uncertainties
+indicate that the 95\\% CI includes 0 or not, respectively.
 }
