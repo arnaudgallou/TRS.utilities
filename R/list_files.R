@@ -12,8 +12,8 @@
 #' @export
 list_files <- function(path = ".", target = NULL, names, full.names = TRUE, ...) {
   if (!missing(names)) {
-    if (!(is.function(names) || is_string(names))) {
-      abort("`names` must be a function or string.")
+    if (!(is.function(names) || is.character(names))) {
+      abort("`names` must be a function or character vector.")
     }
   }
   out <- list.files(path, target, full.names = full.names, ...)
