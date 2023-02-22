@@ -16,5 +16,6 @@ ppc(y, yrep, n_draws = 100, ...)
 \item{...}{Optional arguments passed on to \code{\link[bayesplot:PPC-distributions]{bayesplot::ppc_dens_overlay()}}.}
 }
 \description{
-Wrapper around \code{\link[bayesplot:PPC-distributions]{bayesplot::ppc_dens_overlay()}} to plot posterior predictive check from a JAGS model object.
+Wrapper around \code{\link[bayesplot:PPC-distributions]{bayesplot::ppc_dens_overlay()}} to plot posterior
+predictive check from a JAGS model object.
 }

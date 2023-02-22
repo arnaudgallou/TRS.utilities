@@ -17,15 +17,18 @@ posterior_dist(
 \arguments{
 \item{x}{A data frame.}
 
-\item{mapping}{Default list of aesthetic mappings to use for plot. See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
+\item{mapping}{Default list of aesthetic mappings to use for plot.
+See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
 
-\item{scale}{A scaling factor to scale the height of the ridgelines. See \code{\link[ggridges:geom_ridgeline]{ggridges::geom_ridgeline()}} for details.}
+\item{scale}{A scaling factor to scale the height of the ridgelines. See
+\code{\link[ggridges:geom_ridgeline]{ggridges::geom_ridgeline()}} for details.}
 
 \item{vline_type}{Line type of the line indicating 0.}
 
 \item{vline_color}{Color of the line indicating 0.}
 
-\item{facet_args}{A named list of parameters and arguments to pass on to \code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.}
+\item{facet_args}{A named list of parameters and arguments to pass on to
+\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.}
 }

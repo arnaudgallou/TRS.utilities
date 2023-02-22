@@ -1,14 +1,25 @@
 #' @title Plot posterior distribution from a bayesian model
 #' @description Plot posterior distribution from a bayesian model.
 #' @param x A data frame.
-#' @param mapping Default list of aesthetic mappings to use for plot. See [`ggplot2::ggplot()`] for details.
-#' @param scale A scaling factor to scale the height of the ridgelines. See [`ggridges::geom_ridgeline()`] for details.
+#' @param mapping Default list of aesthetic mappings to use for plot.
+#'   See [`ggplot2::ggplot()`] for details.
+#' @param scale A scaling factor to scale the height of the ridgelines. See
+#'   [`ggridges::geom_ridgeline()`] for details.
 #' @param vline_type Line type of the line indicating 0.
 #' @param vline_color Color of the line indicating 0.
-#' @param facet_args A named list of parameters and arguments to pass on to [`ggplot2::facet_grid()`].
+#' @param facet_args A named list of parameters and arguments to pass on to
+#'   [`ggplot2::facet_grid()`].
 #' @param ... Other arguments passed on to [`ggplot2::ggplot()`].
 #' @export
-posterior_dist <- function(x, mapping = aes(), scale = 1, vline_type = 1, vline_color = "grey90", facet_args = list(), ...) {
+posterior_dist <- function(
+    x,
+    mapping = aes(),
+    scale = 1,
+    vline_type = 1,
+    vline_color = "grey90",
+    facet_args = list(),
+    ...
+) {
   den_mass <- unique(x$ci_id)
   n_mass <- length(den_mass)
   facet_dims <- Filter(Negate(is.null), facet_args[c("rows", "cols")])
@@ -37,7 +48,12 @@ posterior_dist <- function(x, mapping = aes(), scale = 1, vline_type = 1, vline_
       }
     ) +
     geom_segment(
-      aes(x = .data$median, xend = .data$median, y = .data$ymin, yend = .data$ymin + .data$ymax),
+      aes(
+        x = .data$median,
+        xend = .data$median,
+        y = .data$ymin,
+        yend = .data$ymin + .data$ymax
+      ),
       data = df_seg,
       size = 1
     ) +
@@ -55,7 +71,6 @@ posterior_dist <- function(x, mapping = aes(), scale = 1, vline_type = 1, vline_
   plot
 }
 
-
 #' @title Add axis lines to facetted plots
 #' @description Draw axis lines to facetted plots.
 #' @param size Line size (in mm).
@@ -68,9 +83,9 @@ add_facet_lines <- function(size = 1) {
   )
 }
 
-
 #' @title Posterior predictive checks
-#' @description Wrapper around [`bayesplot::ppc_dens_overlay()`] to plot posterior predictive check from a JAGS model object.
+#' @description Wrapper around [`bayesplot::ppc_dens_overlay()`] to plot posterior
+#'   predictive check from a JAGS model object.
 #' @param y Observed data.
 #' @param yrep Fitted data.
 #' @param n_draws Number of fitted draws to sample.
@@ -82,11 +97,12 @@ ppc <- function(y, yrep, n_draws = 100, ...) {
   bayesplot::ppc_dens_overlay(y, yrep, ...)
 }
 
-
 #' @title Posterior predictive checks
-#' @description More specific variant of [`ppc()`] that will check posteriors from the global-scale analysis.
+#' @description More specific variant of [`ppc()`] that will check posteriors
+#'   from the global-scale analysis.
 #' @inheritParams ppc
-#' @param all If `TRUE`, will use all species ranges. Otherwise, will use species ranges averaged in each location.
+#' @param all If `TRUE`, will use all species ranges. Otherwise, will use species
+#'   ranges averaged in each location.
 #' @export
 ppc_ <- function(y, yrep, all = FALSE, ...) {
   if (all) {
@@ -99,12 +115,13 @@ ppc_ <- function(y, yrep, all = FALSE, ...) {
   ppc(y, yrep, adjust = 2, ...)
 }
 
-
 #' @title Trace plots of MCMC draws
 #' @description Trace plots of MCMC draws.
 #' @param x A data frame.
-#' @param mapping Default list of aesthetic mappings to use for plot. See [`ggplot2::ggplot()`] for details.
-#' @param facets Variables or expressions defining faceting groups on the columns dimension. See [`ggplot2::facet_wrap()`] for details.
+#' @param mapping Default list of aesthetic mappings to use for plot.
+#'   See [`ggplot2::ggplot()`] for details.
+#' @param facets Variables or expressions defining faceting groups on the columns
+#'   dimension. See [`ggplot2::facet_wrap()`] for details.
 #' @export
 traceplot <- function(x, mapping = aes(), facets) {
   ggplot(x, mapping) +

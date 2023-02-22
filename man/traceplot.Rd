@@ -9,9 +9,11 @@ traceplot(x, mapping = aes(), facets)
 \arguments{
 \item{x}{A data frame.}
 
-\item{mapping}{Default list of aesthetic mappings to use for plot. See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
+\item{mapping}{Default list of aesthetic mappings to use for plot.
+See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
 
-\item{facets}{Variables or expressions defining faceting groups on the columns dimension. See \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}} for details.}
+\item{facets}{Variables or expressions defining faceting groups on the columns
+dimension. See \code{\link[ggplot2:facet_wrap]{ggplot2::facet_wrap()}} for details.}
 }
 \description{
 Trace plots of MCMC draws.
