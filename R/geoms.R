@@ -52,12 +52,12 @@ posterior_dist <- function(
   facet_dims <- Filter(Negate(is.null), facet_args[c("rows", "cols")])
   yvar <- mapping$y
 
-  df_seg <- x %>%
-    distinct(!!!unlist(facet_dims), {{yvar}}, .keep_all = TRUE) %>%
-    mutate(
-      ymin = as.numeric(factor({{yvar}})),
-      ymax = .data$ymax * scale
-    )
+  df_seg <- distinct(x, !!!unlist(facet_dims), {{yvar}}, .keep_all = TRUE)
+  df_seg <- mutate(
+    df_seg,
+    ymin = as.numeric(factor({{yvar}})),
+    ymax = .data$ymax * scale
+  )
 
   plot <- ggplot(x, mapping) +
     line_0(linetype = vline_type, color = vline_color) +
