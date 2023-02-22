@@ -74,10 +74,10 @@ regressions.draws <- function(
       alpha = if (point_labels) .7 else 1
     )
   if (!point_labels) {
-    plot <- plot + geom_errorbar(aes(
+    plot <- plot + geom_errorbar(
       aes(ymin = .data$se_min, ymax = .data$se_max),
       size = .3
-    ), size = .3)
+    )
   }
   plot <- plot + regression_points(colors, point_labels)
   if (point_labels) {
