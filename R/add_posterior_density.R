@@ -5,18 +5,18 @@
 #' @param data A data frame.
 #' @param estimates Variable containing posterior distributions.
 #' @param prob The probability mass to include in the shaded region.
-#' @param outer_prob The probability mass to include in the outer interval.
+#' @param prob_outer The probability mass to include in the outer interval.
 #' @export
-add_posterior_density <- function(data, estimates, prob, outer_prob = .99) {
+add_posterior_density <- function(data, estimates, prob, prob_outer = .99) {
   out <- add_averages(data, {{estimates}})
   groups <- group_vars(out)
   out <- left_join(
-    add_hdi(out, {{estimates}}, prob, outer_prob),
+    add_hdi(out, {{estimates}}, prob, prob_outer),
     add_density(out, {{estimates}}, median, mean),
     by = groups,
     multiple = "all"
   )
-  probs <- c(prob, outer_prob)
+  probs <- c(prob, prob_outer)
   out <- map(probs, \(prob) filter_cred_interval(out, prob))
   out <- list_rbind(out, names_to = "ci_id")
   coords <- summarize(
@@ -50,8 +50,8 @@ add_density <- function(data, estimates, ...) {
   unnest(out, .data$density)
 }
 
-add_hdi <- function(data, estimates, prob, outer_prob = .99) {
-  probs <- c(prob, outer_prob)
+add_hdi <- function(data, estimates, prob, prob_outer = .99) {
+  probs <- c(prob, prob_outer)
   out <- summarize(
     data,
     ci = list(bayestestR::hdi({{estimates}}, ci = probs)),
