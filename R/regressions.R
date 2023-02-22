@@ -13,7 +13,7 @@ regressions <- function(data, labels, ...) {
     plot_data <- data
   } else {
     plot_data <- map(data, \(x) {
-      mutate(x, expl_var = factor(expl_var, levels = names(labels)))
+      mutate(x, expl_var = factor(.data$expl_var, levels = names(labels)))
     })
   }
   plot <- ggplot(plot_data$data, aes(x = .data$x, y = .data$est_range_mean))
@@ -74,7 +74,10 @@ regressions.draws <- function(
       alpha = if (point_labels) .7 else 1
     )
   if (!point_labels) {
-    plot <- plot + geom_errorbar(aes(ymin = se_min, ymax = se_max), size = .3)
+    plot <- plot + geom_errorbar(aes(
+      aes(ymin = .data$se_min, ymax = .data$se_max),
+      size = .3
+    ), size = .3)
   }
   plot <- plot + regression_points(colors, point_labels)
   if (point_labels) {
@@ -112,7 +115,7 @@ regressions.land_types <- function(data, labels, ...) {
     scale_fill_manual(values = colors$ribbons) +
     ggnewscale::new_scale_fill() +
     geom_errorbar(
-      aes(ymin = .datase_min, ymax = .datase_max),
+      aes(ymin = .data$se_min, ymax = .data$se_max),
       size = .3
     ) +
     regression_points(colors) +

@@ -21,7 +21,7 @@ calc_pred_conf <- function(files) {
     data <- read_rds(file)
     fit <- get_jags_sims(data, "beta")
     out <- pluck(data, "elev_grad_clim")
-    out <- group_by(out, land_type)
+    out <- group_by(out, .data$land_type)
     suppressWarnings(
       out <- modelr::data_grid(
         out,
@@ -81,14 +81,14 @@ rescale <- function(x, scales) {
   if (length(scales) == 1L) {
     return(x * scales)
   }
-  data <- pick(expl_var)
+  data <- pick(.data$expl_var)
   case_when(!!!parse_exprs(
     glue("data$expl_var == '{names(scales)}' ~ x * {scales}")
   ))
 }
 
 relevel <- function(x, reverse) {
-  data <- pick(x)
+  data <- pick(.data[[x]])
   levels <- unique(data$x)
   if (reverse) {
     levels <- rev(levels)
@@ -97,7 +97,7 @@ relevel <- function(x, reverse) {
 }
 
 relabel <- function(labels) {
-  data <- pick(expl_var)
-  out <- str_replace_all(data$expl_var, labels)
+  data <- pick(.data$expl_var)
+  out <- string_replace_all(data$expl_var, labels)
   factor(out, levels = labels)
 }
