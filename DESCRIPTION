@@ -32,4 +32,5 @@ Imports:
     bayesplot,
     modelr,
     utils,
-    colorspace
+    colorspace,
+    tidyselect
