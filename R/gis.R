@@ -16,7 +16,7 @@ rs_read.character <- function(x, ...) {
 rs_read.collection <- function(x, ...) {
   class(x) <- "character"
   out <- terra::rast(x, ...)
-  if (has_names(x)) {
+  if (all(have_name(x))) {
     out <- setNames(out, names(x))
   }
   out
