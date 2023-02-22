@@ -15,8 +15,8 @@ get_statistical_details <- function(data) {
   select(out, -c(.data$term, starts_with("conf")))
 }
 
-calc_jags_r2 <- function(data, posteriors) {
-  formula <- data$settings$formula
+calc_jags_r2 <- function(x, posteriors) {
+  formula <- x$settings$formula
   terms <- parse_formula(formula)
   is_land_type <- any(grepl("land_type", terms))
   if (length(terms) == 1L) {
