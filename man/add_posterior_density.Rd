@@ -18,6 +18,5 @@ add_posterior_density(data, estimates, prob, prob_outer = 0.99)
 }
 \description{
 Add the Kernel density estimates and highest density interval of
-posterior distributions to a data frame prior to using
-\code{\link[=posterior_distributions]{posterior_distributions()}}.
+posterior distributions to a data frame prior to using \code{\link[=posterior_dist]{posterior_dist()}}.
 }
