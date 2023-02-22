@@ -32,5 +32,5 @@ same as the explanatory variables.}
 \item{reverse}{Should the order of posterior distributions be reversed?}
 }
 \description{
-Structure data for \code{\link[=posterior_distribution]{posterior_distribution()}}.
+Structure data for \code{\link[=posterior_distributions]{posterior_distributions()}}.
 }

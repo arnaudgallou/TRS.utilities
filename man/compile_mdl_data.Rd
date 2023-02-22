@@ -12,7 +12,7 @@ compile_mdl_data(
   singleton_thr,
   std_elev_grad = FALSE,
   average = FALSE,
-  cols = c(),
+  cols = NULL,
   rename_bioclim = TRUE,
   expr = NULL,
   std_from = c("top", "bottom")
@@ -21,25 +21,36 @@ compile_mdl_data(
 \arguments{
 \item{x}{A data frame containing data to pass on to a JAGS model.}
 
-\item{clim_data}{A data frame containing climate data. Only to be specified if \code{average=TRUE}.}
+\item{clim_data}{A data frame containing climate data. Only to be specified if
+\code{average=TRUE}.}
 
 \item{elevation_span}{Minimum length of the elevational gradients to filter.}
 
-\item{exclusion_zone}{Length of the upper and lower sections of the elevational gradient to discard species from. E.g. an exclusion zone of 250 will discard all species found exclusively in the lower and upper 250 m of elevational gradients. All species with at least one observation outside of the exclusion zone are kept.}
+\item{exclusion_zone}{Length of the upper and lower sections of the elevational
+gradient to discard species from. E.g. an exclusion zone of 250 will discard
+all species found exclusively in the lower and upper 250 m of elevational
+gradients. All species with at least one observation outside of the exclusion
+zone are kept.}
 
-\item{singleton_thr}{Maximum proportion of single observations to filter location with.}
+\item{singleton_thr}{Maximum proportion of single observations to filter
+location with.}
 
 \item{std_elev_grad}{Should elevational gradients be standardised?}
 
 \item{average}{Should species range sizes and climate data averaged?}
 
-\item{cols}{A vector of column names to keep. Variables passed to \code{expr} will be automatically kept.}
+\item{cols}{A vector of column names to keep. Variables passed to \code{expr} will
+be automatically kept.}
 
-\item{rename_bioclim}{If \code{TRUE} (the default), will rename "bio1", "bio2", "bio4" and "bio12" as "mat", "dtr", "ts" and "ap", respectively.}
+\item{rename_bioclim}{If \code{TRUE} (the default), will rename "bio1", "bio2",
+"bio4" and "bio12" as "mat", "dtr", "ts" and "ap", respectively.}
 
-\item{expr}{A character vector (for the local-scale analysis) or a formula (for the global-scale analysis) describing the predictor variable(s) to fit the model.}
+\item{expr}{A character vector (for the local-scale analysis) or a formula
+(for the global-scale analysis) describing the predictor variable(s) to fit
+the model.}
 
-\item{std_from}{Edge on the elevational gradient to standardize from. One of \code{c("top", "bottom")}.}
+\item{std_from}{Edge on the elevational gradient to standardize from. One of
+\code{c("top", "bottom")}.}
 }
 \value{
 A list of JAGS-compatible data.
