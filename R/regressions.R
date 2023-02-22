@@ -4,6 +4,7 @@
 #' @param labels A character vector used to label the x axis. If `labels` contains
 #'   several labels, each label must be named. Names must be the same as the
 #'   explanatory variables.
+#' @param ... Other arguments passed to methods.
 #' @export
 regressions <- function(data, labels, ...) {
   colors <- regression_colors()

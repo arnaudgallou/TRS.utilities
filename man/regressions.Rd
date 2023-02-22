@@ -27,6 +27,8 @@ regressions(data, labels, ...)
 several labels, each label must be named. Names must be the same as the
 explanatory variables.}
 
+\item{...}{Other arguments passed to methods.}
+
 \item{n_draws}{Number of draws to sample from the 95\\\% credible interval.}
 
 \item{draws_prob}{Probability mass to sample the draws from.}
