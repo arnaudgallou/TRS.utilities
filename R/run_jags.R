@@ -126,7 +126,7 @@ make_filename <- function(x, filename) {
   if (!is.null(filename)) {
     return(glue("{filename}.rds"))
   }
-  tail <- if (!is.null(x$std_from)) glue("-{x$std_from}") else ""
+  tail <- if (is_true(x$std_elev_grad)) glue("-{x$std_from}") else ""
   terms <- paste(x$terms, collapse = "_")
   glue("{terms}-span_{x$elevation_span}-excl_{x$exclusion_zone}{tail}.rds")
 }
