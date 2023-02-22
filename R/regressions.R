@@ -111,7 +111,10 @@ regressions.land_types <- function(data, labels, ...) {
     scale_color_manual(values = colors$ribbons) +
     scale_fill_manual(values = colors$ribbons) +
     ggnewscale::new_scale_fill() +
-    geom_errorbar(aes(ymin = se_min, ymax = se_max), size = .3) +
+    geom_errorbar(
+      aes(ymin = .datase_min, ymax = .datase_max),
+      size = .3
+    ) +
     regression_points(colors) +
     regression_theme(has_single_label)
 }
