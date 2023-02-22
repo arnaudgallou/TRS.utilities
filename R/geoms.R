@@ -1,3 +1,30 @@
+#' @title Draw a line at 0
+#' @description Draw a vertical or horizontal line at 0.
+#' @param axis Axis to draw the line on.
+#' @param linetype Line type.
+#' @param color Line color.
+#' @param size Line size (in mm).
+#' @param ... Other arguments passed on to [ggplot2::layer()].
+#' @export
+line_0 <- function(
+    axis = c("x", "y"),
+    linetype = "dashed",
+    color = "grey50",
+    size = .3,
+    ...
+) {
+  axis <- match.arg(axis)
+  fun <- if (axis == "x") geom_vline else geom_hline
+  args <- list2(
+    "{axis}intercept" := 0,
+    linetype = linetype,
+    color = color,
+    size = size,
+    ...
+  )
+  do.call(fun, args)
+}
+
 #' @title Plot posterior distribution from a bayesian model
 #' @description Plot posterior distribution from a bayesian model.
 #' @param x A data frame.
