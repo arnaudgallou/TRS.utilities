@@ -43,7 +43,7 @@ r_squared <- function(x, y) {
 
 #' @title Calculate the probability of posterior fits to be lower than 0
 #' @description Calculate the probability of posterior fits to be lower than 0.
-#' @param x A data frame containing posterior fits.
+#' @param data A data frame containing posterior fits.
 #' @return A [`tibble`][tibble::tibble()].
 #' @export
 calc_prob_inf_0 <- function(data) {

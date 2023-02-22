@@ -7,7 +7,7 @@
 calc_prob_inf_0(data)
 }
 \arguments{
-\item{x}{A data frame containing posterior fits.}
+\item{data}{A data frame containing posterior fits.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble}}.
