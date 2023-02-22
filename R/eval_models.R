@@ -7,11 +7,10 @@
 #' @return A tibble of WAIC and LOO IC estimates with standard error.
 #' @export
 eval_models <- function(files) {
-  map_df(files, ~ {
+  out <- map(files, ~ {
     data <- read_rds(.x)
     loglik_data <- get_jags_sims(data, "loglik")
     matrix <- as.matrix(loglik_data)
-
     suppressWarnings({
       waic <- waic(matrix)
       waic <- get_ic_estimates(waic)
@@ -20,15 +19,16 @@ eval_models <- function(files) {
       loo <- loo(matrix, r_eff = r_eff)
       loo <- get_ic_estimates(loo, "loo")
     })
-
     bind_cols(get_mdl_settings(data), waic, loo)
-  }) %>%
-    arrange(.data$waic, .data$looic) %>%
-    mutate(
-      delta_waic = delta(.data$waic),
-      delta_looic = delta(.data$looic)
-    ) %>%
-    select(.data$model:.data$std_from, ends_with("waic"), ends_with("looic"))
+  })
+  out <- list_rbind(out)
+  out <- arrange(out, .data$waic, .data$looic)
+  out <- mutate(
+    out,
+    delta_waic = delta(.data$waic),
+    delta_looic = delta(.data$looic)
+  )
+  select(out, .data$model:.data$std_from, ends_with("waic"), ends_with("looic"))
 }
 
 
