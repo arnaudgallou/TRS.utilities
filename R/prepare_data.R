@@ -64,7 +64,7 @@ make_posterior_data <- function(
   }
   out <- read_jags(files, "sims", vars = "span|zone|expl|beta_2")
   out <- group_by(out, .data$expl_var, .data$elevation_span, .data$exclusion_zone)
-  out <- add_posterior_density(out, .data$beta_2, prob, outer_prob)
+  out <- add_posterior_density(out, .data$beta_2, prob, prob_outer)
   out <- ungroup(out)
   out <- mutate(
     out,
