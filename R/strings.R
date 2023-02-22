@@ -118,13 +118,6 @@ first_word <- function(string, compound_word = TRUE) {
   string_extract(string, glue(r"{^[^\pL]*\K[\pL{h}]+}"))
 }
 
-#' @title To snake case
-#' @description Convert a character string to snake case.
-#' @param x A character vector.
-#' @return A character vector.
-#' @examples
-#' to_snake_case("laCigaleEtLaFourmi")
-#' @export
 to_snake_case <- function(x) {
   assert_that(is.character(x))
   x <- string_replace_all(x, c(
