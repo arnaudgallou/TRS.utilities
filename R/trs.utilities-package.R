@@ -3,7 +3,7 @@
 #' @importFrom rlang .data := %||%
 #' @importFrom rlang quos quo enquo exprs parse_exprs fn_fmls
 #' @importFrom rlang is_formula is_empty is_false is_true is_string have_name
-#' @importFrom rlang abort caller_env list2 dots_list
+#' @importFrom rlang abort caller_env list2 dots_list zap
 #' @importFrom tidyselect all_of any_of starts_with ends_with matches contains
 #' @importFrom tidyselect vars_select_helpers
 #' @importFrom dplyr mutate summarize across select pull distinct arrange relocate

@@ -10,7 +10,8 @@ make_regression_data <- function(files, type = c("draws", "land_types")) {
     if (type == "land_types" && item == "sims") {
       return(calc_pred_conf(files))
     }
-    read_jags(files, item, .id = if (type == "land_types") "expl_var")
+    nms <- if (type == "land_types") "expl_var" else zap()
+    read_jags(files, item, names_to = nms)
   })
   out <- set_names(out, items)
   structure(out, class = c(type, "list"))
