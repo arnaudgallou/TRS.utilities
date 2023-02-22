@@ -23,7 +23,7 @@ list_files <- function(path = ".", target = NULL, names, full.names = TRUE, ...)
   if (!missing(names)) {
     if (is.function(names)) {
       nm <- names(out)
-    } else if (is.string(names) && has_metachr(names)) {
+    } else if (is_string(names) && has_metachr(names)) {
       nm <- string_extract(basename(out), names)
     } else {
       nm <- names
