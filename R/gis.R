@@ -87,7 +87,7 @@ rs_set_range <- function(x) {
 #' @param col_name Name of the classified variable.
 #' @param ... Other arguments passed to [`terra::classify()`].
 #' @export
-rs_reclass_dem <- function(x, binwidth = 100, right = FALSE, col_name = "zone", ...) {
+rs_reclass <- function(x, binwidth = 100, right = FALSE, col_name = "zone", ...) {
   min <- round_nearest(terra::minmax(x)[1], -binwidth)
   max <- round_nearest(terra::minmax(x)[2], -binwidth)
   s <- seq(min, max, binwidth)
