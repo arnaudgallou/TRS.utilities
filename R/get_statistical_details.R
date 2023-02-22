@@ -49,5 +49,5 @@ r_squared <- function(x, y) {
 calc_prob_inf_0 <- function(data) {
   out <- mutate(data, across(matches("beta"), ~ mean(.x < 0)))
   out <- distinct(out)
-  rename_with(out, \(col) str_replace_all(col, "(?=beta)", "p_lower_0_"))
+  rename_with(out, \(col) string_replace_all(col, "(?=beta)", "p_lower_0_"))
 }
