@@ -6,6 +6,6 @@
 \alias{TRS.utilities-package}
 \title{TRS.utilities: TRS Utility Functions}
 \description{
-Package containing helper functions to reproduce results from the TRS project.
+Helpers functions to reproduce results from the TRS project.
 }
 \keyword{internal}
