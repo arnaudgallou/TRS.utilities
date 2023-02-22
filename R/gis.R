@@ -78,20 +78,22 @@ rs_set_range <- function(x) {
   terra::setMinMax(x)
 }
 
-#' @title Reclassify a DEM object
-#' @description Divide values of a DEM object into bins of a given width.
+#' @title Reclassify a raster object
+#' @description Divide values of a raster object into bins of a given width.
 #' @param x A raster object.
 #' @param binwidth The width of the bins.
-#' @param right Should bin intervals be closed on the right?
-#'   See [`terra::classify()`] for details.
+#' @param right Should bin intervals be closed on the right? See [`terra::classify()`]
+#'   for details.
+#' @param col_name Name of the classified variable.
+#' @param ... Other arguments passed to [`terra::classify()`].
 #' @export
-rs_reclass_dem <- function(x, binwidth = 100, right = FALSE) {
+rs_reclass_dem <- function(x, binwidth = 100, right = FALSE, col_name = "zone", ...) {
   min <- round_nearest(terra::minmax(x)[1], -binwidth)
   max <- round_nearest(terra::minmax(x)[2], -binwidth)
   s <- seq(min, max, binwidth)
   new_values <- tibble(lower = s, upper = s + binwidth, new = s)
-  x <- terra::classify(x, new_values, right = right)
-  setNames(x, "zone")
+  x <- terra::classify(x, new_values, right = right, ...)
+  set_names(x, col_name)
 }
 
 #' @title Read a multi-layer raster file
