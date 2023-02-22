@@ -96,3 +96,11 @@ remove_file_ext <- function(file) {
 has_metachr <- function(x) {
   grepl(r"{[\\\[\](){}|?$^*+]}", x, perl = TRUE)
 }
+
+to_chr_class <- function(vec, negate = FALSE) {
+  assert_that(is.character(vec))
+  neg <- if (isTRUE(negate)) "^" else ""
+  x <- paste(vec, collapse = "")
+  x <- string_replace(x, r"{([-\\\[\]])}", r"{\\\1}")
+  paste0("[", neg, x, "]")
+}
