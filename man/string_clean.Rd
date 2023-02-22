@@ -26,6 +26,7 @@ characters that directly follow the first and last letter.}
 A character vector.
 }
 \description{
-Wrapper around \code{\link[=string_strip]{string_strip()}} that also removes underscore
-and repeated whitespace inside a string.
+Remove any non-letter characters from the beginning and end of a
+character string as well as underscores and repeated whitespaces inside a
+string.
 }

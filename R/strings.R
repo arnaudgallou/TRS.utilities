@@ -80,8 +80,9 @@ string_strip <- function(
 
 #' @title Remove non-letter characters, underscore and repeated whitespace inside
 #'   a string
-#' @description Wrapper around [`string_strip()`] that also removes underscore
-#'   and repeated whitespace inside a string.
+#' @description Remove any non-letter characters from the beginning and end of a
+#'   character string as well as underscores and repeated whitespaces inside a
+#'   string.
 #' @param string A character vector.
 #' @param rm_period Should ending periods be removed?
 #' @param keep A single character vector of character(s) to keep. Only retains
