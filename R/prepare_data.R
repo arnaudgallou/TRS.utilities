@@ -36,7 +36,7 @@ calc_pred_conf <- function(files) {
 }
 
 #' @title Prepare data for plotting posterior distribution
-#' @description Structure data for [`posterior_distribution()`].
+#' @description Structure data for [`posterior_distributions()`].
 #' @param files Files to get data from.
 #' @param yvar Variable describing the vertical axis.
 #' @param prob The probability mass to include in the shaded region.
