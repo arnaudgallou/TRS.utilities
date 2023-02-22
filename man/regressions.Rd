@@ -21,7 +21,7 @@ regressions(data, labels, ...)
 \method{regressions}{land_types}(data, labels, ...)
 }
 \arguments{
-\item{data}{A list of data produced by \code{\link[=regression_data]{regression_data()}}.}
+\item{data}{A list of data produced by \code{\link[=make_regression_data]{make_regression_data()}}.}
 
 \item{labels}{A character vector used to label the x axis. If \code{labels} contains
 several labels, each label must be named. Names must be the same as the
