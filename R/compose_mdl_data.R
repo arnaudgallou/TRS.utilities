@@ -9,7 +9,7 @@ compose_mdl_data <- function(data, matrix_formula = NULL) {
   data_ls <- as.list(data)
 
   n_data_ls <- lapply(data_ls, \(x) if (is.factor(x)) length(unique(x)) else NA)
-  n_data_ls <- setNames(n_data_ls, paste0("n_", names(n_data_ls)))
+  n_data_ls <- set_names(n_data_ls, paste0("n_", names(n_data_ls)))
   n_data_ls <- Filter(Negate(anyNA), n_data_ls)
 
   n_data <- length(data_ls[[1]])

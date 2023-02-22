@@ -25,8 +25,8 @@
 #' @importFrom tibble tibble as_tibble as_tibble_row rowid_to_column
 #' @importFrom tidyr pivot_wider nest unnest drop_na
 #' @importFrom readr write_rds read_rds read_csv
-#' @importFrom purrr map map2 imap pluck list_rbind
-#' @importFrom stats setNames sd density median quantile var model.matrix
+#' @importFrom purrr map map2 imap pluck list_rbind set_names
+#' @importFrom stats sd density median quantile var model.matrix
 #' @importFrom janitor clean_names make_clean_names
 #' @importFrom glue glue
 #' @importFrom utils modifyList

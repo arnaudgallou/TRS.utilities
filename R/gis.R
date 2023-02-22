@@ -17,7 +17,7 @@ rs_read.collection <- function(x, ...) {
   class(x) <- "character"
   out <- terra::rast(x, ...)
   if (all(have_name(x))) {
-    out <- setNames(out, names(x))
+    out <- set_names(out, names(x))
   }
   out
 }
@@ -104,7 +104,7 @@ rs_reclass <- function(x, binwidth = 100, right = FALSE, col_name = "zone", ...)
 #' @export
 rs_read_stk <- function(file, layer_names = NULL) {
   x <- terra::rast(file)
-  setNames(x, layer_names)
+  set_names(x, layer_names)
 }
 
 #' @title Set the coordinate reference system of a raster object
