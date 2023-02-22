@@ -2,7 +2,7 @@
 #'   lower than 0
 #' @description Compute Bayesian R-squared and the probability of posterior fits
 #'   to be lower than 0 from a JAGS model output.
-#' @param x A model object file returned by [`run_jags()`].
+#' @param data A model object file returned by [`run_jags()`].
 #' @return A [`tibble`][tibble::tibble()].
 #' @export
 get_statistical_details <- function(data) {

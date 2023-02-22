@@ -8,7 +8,7 @@ lower than 0}
 get_statistical_details(data)
 }
 \arguments{
-\item{x}{A model object file returned by \code{\link[=run_jags]{run_jags()}}.}
+\item{data}{A model object file returned by \code{\link[=run_jags]{run_jags()}}.}
 }
 \value{
 A \code{\link[tibble:tibble]{tibble}}.
