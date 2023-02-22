@@ -2,9 +2,10 @@
 % Please edit documentation in R/get_statistical_details.R
 \name{get_statistical_details}
 \alias{get_statistical_details}
-\title{Compute Bayesian R-squared and the probability of posterior fits to be lower than 0}
+\title{Compute Bayesian R-squared and the probability of posterior fits to be
+lower than 0}
 \usage{
-get_statistical_details(x)
+get_statistical_details(data)
 }
 \arguments{
 \item{x}{A model object file returned by \code{\link[=run_jags]{run_jags()}}.}
@@ -13,5 +14,6 @@ get_statistical_details(x)
 A \code{\link[tibble:tibble]{tibble}}.
 }
 \description{
-Compute Bayesian R-squared and the probability of posterior fits to be lower than 0 from a JAGS model output.
+Compute Bayesian R-squared and the probability of posterior fits
+to be lower than 0 from a JAGS model output.
 }

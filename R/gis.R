@@ -22,13 +22,11 @@ rs_read.collection <- function(x, ...) {
   out
 }
 
-
 #' @title Get or set the extent of a raster object
 #' @description Alias for [`terra::ext`].
 #' @param ... Arguments to pass on to [`terra::ext()`].
 #' @export
 rs_extent <- function(...) terra::ext(...)
-
 
 #' @title Extract values from a raster object
 #' @description Alias for [`terra::extract`].
@@ -36,13 +34,11 @@ rs_extent <- function(...) terra::ext(...)
 #' @export
 rs_extract <- function(...) terra::extract(...)
 
-
 #' @title Crop a raster object
 #' @description Alias for [`terra::crop`].
 #' @param ... Arguments to pass on to [`terra::crop()`].
 #' @export
 rs_crop <- function(...) terra::crop(...)
-
 
 #' @title Reproject a spatial object
 #' @description Alias for [`terra::project`].
@@ -50,20 +46,17 @@ rs_crop <- function(...) terra::crop(...)
 #' @export
 rs_project <- function(...) terra::project(...)
 
-
 #' @title Compute zonal statistics
 #' @description Alias for [`terra::zonal`].
 #' @param ... Arguments to pass on to [`terra::zonal()`].
 #' @export
 rs_zonal <- function(...) terra::zonal(...)
 
-
 #' @title Create spatial vector objects
 #' @description Alias for [`terra::vect`].
 #' @param ... Arguments to pass on to [`terra::vect()`].
 #' @export
 rs_vect <- function(...) terra::vect(...)
-
 
 #' @title Convert a raster extent to a polygon
 #' @description Convert a raster extent to a polygon.
@@ -75,7 +68,6 @@ rs_ext_to_polygon <- function(x) {
   rs_set_crs(x)
 }
 
-
 #' @title Set the minimum and maximum values of a raster object
 #' @description Remove missing values and set the minimum and maximum values of
 #'   a raster object.
@@ -85,7 +77,6 @@ rs_set_range <- function(x) {
   terra::NAflag(x) <- -1
   terra::setMinMax(x)
 }
-
 
 #' @title Reclassify a DEM object
 #' @description Divide values of a DEM object into bins of a given width.
@@ -103,7 +94,6 @@ rs_reclass_dem <- function(x, binwidth = 100, right = FALSE) {
   setNames(x, "zone")
 }
 
-
 #' @title Read a multi-layer raster file
 #' @description Read a multi-layer raster file.
 #' @param file A file containing a raster stack.
@@ -115,17 +105,18 @@ rs_read_stk <- function(file, layer_names = NULL) {
   setNames(x, layer_names)
 }
 
-
 #' @title Set the coordinate reference system of a raster object
 #' @description Set the coordinate reference system of a raster object.
 #' @param x A aster object.
 #' @param proj Projection to set to the raster object.
 #' @export
-rs_set_crs <- function(x, proj = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0") {
+rs_set_crs <- function(
+    x,
+    proj = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+) {
   terra::crs(x) <- proj
   x
 }
-
 
 #' @title Subset values from a raster object
 #' @description Wrapper around [`terra::mask()`] to subset values from a raster
