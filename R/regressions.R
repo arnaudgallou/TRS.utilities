@@ -55,7 +55,7 @@ regressions.draws <- function(
     .groups = "drop"
   )
   draws <- ungroup(draws)
-  if (!point_labels) {
+  if (is_false(point_labels)) {
     plot <- plot +
       geom_abline(
         aes(slope = .data$beta_2, intercept = .data$beta_1),
@@ -73,14 +73,14 @@ regressions.draws <- function(
       size = if (point_labels) .25 else 1,
       alpha = if (point_labels) .7 else 1
     )
-  if (!point_labels) {
+  if (is_false(point_labels)) {
     plot <- plot + geom_errorbar(
       aes(ymin = .data$se_min, ymax = .data$se_max),
       size = .3
     )
   }
   plot <- plot + regression_points(colors, point_labels)
-  if (point_labels) {
+  if (is_true(point_labels)) {
     plot <- plot +
       ggrepel::geom_text_repel(
         aes(label = .data$rowid, color = .data$land_type),
