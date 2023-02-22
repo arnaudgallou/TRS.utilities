@@ -78,15 +78,23 @@ string_strip <- function(
   string_replace(string, pattern, "")
 }
 
-#' @title Remove non-letter characters, underscore and repeated whitespace inside a string
-#' @description Wrapper around [`string_strip()`] that also removes underscore and repeated whitespace inside a string.
+#' @title Remove non-letter characters, underscore and repeated whitespace inside
+#'   a string
+#' @description Wrapper around [`string_strip()`] that also removes underscore
+#'   and repeated whitespace inside a string.
 #' @param string A character vector.
 #' @param rm_period Should ending periods be removed?
-#' @param keep A single character vector of character(s) to keep. Only retains characters that directly follow the first and last letter.
+#' @param keep A single character vector of character(s) to keep. Only retains
+#'   characters that directly follow the first and last letter.
 #' @param side Side of the character string to trim. One of `c("both", "right", "left")`.
 #' @return A character vector.
 #' @export
-string_clean <- function(string, rm_period = FALSE, keep = NULL, side = c("both", "left", "right")) {
+string_clean <- function(
+    string,
+    rm_period = FALSE,
+    keep = NULL,
+    side = c("both", "left", "right")
+) {
   patterns <- c(
     r"{\B_\B|(?<!['\"])(?<=[\p{Pe}\p{Po}])(?=\pL)|(?<=\pL)(?=[\p{Ps}&])}" = " ",
     "_" = "",

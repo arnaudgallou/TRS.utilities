@@ -2,7 +2,8 @@
 % Please edit documentation in R/strings.R
 \name{string_clean}
 \alias{string_clean}
-\title{Remove non-letter characters, underscore and repeated whitespace inside a string}
+\title{Remove non-letter characters, underscore and repeated whitespace inside
+a string}
 \usage{
 string_clean(
   string,
@@ -16,7 +17,8 @@ string_clean(
 
 \item{rm_period}{Should ending periods be removed?}
 
-\item{keep}{A single character vector of character(s) to keep. Only retains characters that directly follow the first and last letter.}
+\item{keep}{A single character vector of character(s) to keep. Only retains
+characters that directly follow the first and last letter.}
 
 \item{side}{Side of the character string to trim. One of \code{c("both", "right", "left")}.}
 }
@@ -24,5 +26,6 @@ string_clean(
 A character vector.
 }
 \description{
-Wrapper around \code{\link[=string_strip]{string_strip()}} that also removes underscore and repeated whitespace inside a string.
+Wrapper around \code{\link[=string_strip]{string_strip()}} that also removes underscore
+and repeated whitespace inside a string.
 }
