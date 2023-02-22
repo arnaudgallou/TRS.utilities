@@ -65,7 +65,7 @@ string_strip <- function(
   if (is.null(keep)) {
     keep_left <- keep_right <- ""
   } else {
-    keep <- vec_to_chr_class(keep)
+    keep <- to_chr_class(keep)
     keep_left <- glue("(?<!{keep})")
     keep_right <- glue("(?!{keep})")
   }
