@@ -24,7 +24,6 @@ name_suffix <- function(x) {
 #'   to the nearest value.
 #' @export
 round_nearest <- function(x, nearest = -10) {
-  assert_that(is.numeric(x))
   nearest <- -nearest
   (x %/% nearest) * nearest
 }
@@ -43,7 +42,6 @@ proportion <- function(condition) {
 #' @param x A numeric vector.
 #' @export
 standardize <- function(x) {
-  assert_that(is.numeric(x))
   (x - mean(x, na.rm = TRUE)) / (2 * sd(x, na.rm = TRUE))
 }
 
@@ -52,7 +50,6 @@ standardize <- function(x) {
 #' @param x Numeric vector.
 #' @export
 delta <- function(x) {
-  assert_that(is.numeric(x))
   x - lag(x, n = length(x), default = x[1])
 }
 
@@ -66,7 +63,6 @@ round_num <- function(x, digits = 2) {
 #' @return A character vector.
 #' @export
 parse_formula <- function(x) {
-  assert_that(is_formula(x))
   string_extract_all(deparse(x), "\\w+", simplify = TRUE)
 }
 
@@ -98,6 +94,5 @@ remove_file_ext <- function(file) {
 #' @return A boolean.
 #' @export
 has_metachr <- function(x) {
-  assert_that(is.string(x))
   grepl(r"{[\\\[\](){}|?$^*+]}", x, perl = TRUE)
 }

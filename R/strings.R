@@ -128,7 +128,6 @@ first_word <- function(string, compound_word = TRUE) {
 }
 
 to_snake_case <- function(x) {
-  assert_that(is.character(x))
   x <- string_replace_all(x, c(
     r"{[^\pL\pN]+|(?<=\p{Lu})(?=\p{Lu}\p{Ll})|(?<=\p{Ll})(?=\p{Lu}|\pN)|(?<=\pN)(?!\pN)}" = "_",
     "^_|_$" = ""
