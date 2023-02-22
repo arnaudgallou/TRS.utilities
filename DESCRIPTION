@@ -33,4 +33,5 @@ Imports:
     modelr,
     utils,
     colorspace,
-    tidyselect
+    tidyselect,
+    data.table
