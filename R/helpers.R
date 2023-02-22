@@ -63,7 +63,7 @@ round_num <- function(x, digits = 2) {
 #' @return A character vector.
 #' @export
 parse_formula <- function(x) {
-  string_extract_all(deparse(x), "\\w+", simplify = TRUE)
+  string_extract_all(deparse(x), "\\w+")
 }
 
 #' @title Parse numeric values from a string
