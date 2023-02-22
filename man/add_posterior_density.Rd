@@ -5,7 +5,7 @@
 \title{Compute the Kernel density estimates and highest density interval of
 posterior distributions}
 \usage{
-add_posterior_density(data, estimates, prob, outer_prob = 0.99)
+add_posterior_density(data, estimates, prob, prob_outer = 0.99)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -14,9 +14,10 @@ add_posterior_density(data, estimates, prob, outer_prob = 0.99)
 
 \item{prob}{The probability mass to include in the shaded region.}
 
-\item{outer_prob}{The probability mass to include in the outer interval.}
+\item{prob_outer}{The probability mass to include in the outer interval.}
 }
 \description{
 Add the Kernel density estimates and highest density interval of
-posterior distributions to a data frame prior to using \code{\link[=posterior_dist]{posterior_dist()}}.
+posterior distributions to a data frame prior to using
+\code{\link[=posterior_distributions]{posterior_distributions()}}.
 }
