@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_jags_sims.R
 \name{get_jags_sims}
 \alias{get_jags_sims}
-\title{Extract \code{sims} data from a JAGS object}
+\title{Extract the \code{sims} data from a JAGS object}
 \usage{
 get_jags_sims(x, vars)
 }
@@ -12,5 +12,6 @@ get_jags_sims(x, vars)
 \item{vars}{Variables to select.}
 }
 \description{
-Extract \code{sims} data from a model object returned by \code{\link[=run_jags]{run_jags()}}. Requires running \code{\link[=run_jags]{run_jags()}} with \code{save=TRUE} and \code{default_output=FALSE}.
+Extract the \code{sims} data from a model object returned by \code{\link[=run_jags]{run_jags()}}.
+Requires running \code{\link[=run_jags]{run_jags()}} with \code{save = TRUE} and \code{default_output = FALSE}.
 }

@@ -11,8 +11,10 @@ add_pred_conf(x, fit, formula)
 
 \item{fit}{A JAGS model fit.}
 
-\item{formula}{Formula containing group-level effects to be considered in the prediction.}
+\item{formula}{Formula containing group-level effects to be considered in the
+prediction.}
 }
 \description{
-Add the posterior predictive with standard deviation and confidence from a JAGS model to a data frame.
+Add the posterior predictive with standard deviation and confidence
+from a JAGS model to a data frame.
 }

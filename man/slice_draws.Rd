@@ -18,7 +18,8 @@ slice_draws(x, estimates, prob = 0.95, n = 200, seed)
 \item{seed}{Random \code{\link[=set.seed]{seed}} to produce identical result.}
 }
 \description{
-Wrapper around the \code{\link[dplyr:slice]{dplyr::slice_sample()}} that subsets rows from a credible interval.
+Wrapper around \code{\link[dplyr:slice]{dplyr::slice_sample()}} that subsets rows from
+a credible interval.
 }
 \examples{
 \dontrun{

@@ -1,5 +1,6 @@
 #' @title Subset rows from a credible interval
-#' @description Wrapper around the [`dplyr::slice_sample()`] that subsets rows from a credible interval.
+#' @description Wrapper around [`dplyr::slice_sample()`] that subsets rows from
+#'   a credible interval.
 #' @param x A data frame.
 #' @param estimates Column to subset the draws from.
 #' @param prob The probability mass to subset.
