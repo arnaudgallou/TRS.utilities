@@ -38,7 +38,7 @@ line_0 <- function(
 #'   [`ggplot2::facet_grid()`].
 #' @param ... Other arguments passed on to [`ggplot2::ggplot()`].
 #' @export
-posterior_dist <- function(
+posterior_distributions <- function(
     x,
     mapping = aes(),
     scale = 1,
