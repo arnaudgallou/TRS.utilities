@@ -48,6 +48,10 @@ string_extract_all <- function(string, pattern) {
   unlist(out)
 }
 
+string_remove <- function(string, pattern) {
+  string_replace(string, pattern, "")
+}
+
 string_strip <- function(
     string,
     rm_period = FALSE,
