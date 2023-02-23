@@ -46,7 +46,7 @@ GlobalAnalyses <- R6::R6Class(
       elev_span = NULL,
       excl_zone = NULL,
       std_from = c("top", "bottom", "none"),
-      labels,
+      labels = NULL,
       type = c("draws", "land_types"),
       point_labels = FALSE
     ) {
