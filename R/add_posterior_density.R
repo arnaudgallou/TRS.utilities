@@ -11,13 +11,13 @@
 add_posterior_density <- function(data, estimates, prob, prob_outer = .99) {
   out <- add_averages(data, {{estimates}})
   groups <- group_vars(out)
+  probs <- c(prob, prob_outer)
   out <- left_join(
-    add_hdi(out, {{estimates}}, prob, prob_outer),
+    add_hdi(out, {{estimates}}, probs),
     add_density(out, {{estimates}}, median, mean),
     by = groups,
     multiple = "all"
   )
-  probs <- c(prob, prob_outer)
   out <- map(probs, \(prob) filter_cred_interval(out, prob))
   out <- list_rbind(out, names_to = "ci_id")
   coords <- summarize(
@@ -51,8 +51,7 @@ add_density <- function(data, estimates, ...) {
   unnest(out, .data$density)
 }
 
-add_hdi <- function(data, estimates, prob, prob_outer = .99) {
-  probs <- c(prob, prob_outer)
+add_hdi <- function(data, estimates, probs) {
   out <- summarize(
     data,
     ci = list(bayestestR::hdi({{estimates}}, ci = probs)),
