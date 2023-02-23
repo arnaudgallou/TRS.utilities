@@ -188,7 +188,9 @@ GlobalAnalyses <- R6::R6Class(
       ...
     ) {
       std_from <- match.arg(std_from)
-      vars <- if (vars == "all") ".+" else vars
+      if (is_string(vars) && vars == "all") {
+        vars <- ".+"
+      }
       elev_span <- elev_span %||% "[^-]+"
       excl_zone <- excl_zone %||% "[^-]+"
       vars <- paste(vars, collapse = "|")
