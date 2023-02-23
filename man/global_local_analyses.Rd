@@ -5,12 +5,8 @@
 \alias{GlobalAnalyses}
 \alias{LocalAnalyses}
 \title{Global- and local-scale analyses}
-\arguments{
-\item{path}{Path to a directory containing model objects returned by
-\code{\link[=run_jags]{run_jags()}}.}
-}
 \description{
-Class to plot model estimates and get model statistics.
+Classes to plot model estimates and get model statistics.
 }
 \examples{
 \dontrun{
@@ -50,7 +46,7 @@ la$slope_histograms()
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{path}}{Path to a directory containing the outputs of the local-scale
+\item{\code{path}}{Path to a directory containing the outputs of the global-scale
 analyses.}
 }
 \if{html}{\out{</div>}}

@@ -1,7 +1,5 @@
 #' @title Global- and local-scale analyses
-#' @description Class to plot model estimates and get model statistics.
-#' @param path Path to a directory containing model objects returned by
-#'   [`run_jags()`].
+#' @description Classes to plot model estimates and get model statistics.
 #' @examples
 #' \dontrun{
 #'
@@ -27,7 +25,7 @@ NULL
 GlobalAnalyses <- R6::R6Class(
   classname = "GlobalAnalyses",
   public = list(
-    #' @param path Path to a directory containing the outputs of the local-scale
+    #' @param path Path to a directory containing the outputs of the global-scale
     #'   analyses.
     initialize = function(path) {
       private$path <- path
