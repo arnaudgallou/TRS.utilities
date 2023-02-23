@@ -58,7 +58,7 @@ GlobalAnalyses <- R6::R6Class(
         names = extract_expl_var
       )
       data <- make_regression_data(fls, type)
-      regressions(data, facet_by, labels, point_labels = point_labels)
+      regressions(data, labels, point_labels = point_labels)
     },
 
     #' @description Plot posterior distribution from a bayesian model.
