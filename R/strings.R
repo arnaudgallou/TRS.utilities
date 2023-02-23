@@ -63,7 +63,7 @@ string_remove <- function(string, pattern) {
 string_clean <- function(string) {
   patterns <- c(
     r"{\B_\B|(?<!['\"])(?<=[\p{Pe}\p{Po}])(?=\pL)|(?<=\pL)(?=[\p{Ps}&])}" = " ",
-    "^[^\\pL]+|[^\\pL]+$|_" = "",
+    "(?!\\.)(?:^[^\\pL]+|[^\\pL]+$)|_" = "",
     "\\s+" = " "
   )
   string_replace_all(string, patterns)
