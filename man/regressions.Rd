@@ -6,11 +6,11 @@
 \alias{regressions.land_types}
 \title{Plot regression fits}
 \usage{
-regressions(data, labels, ...)
+regressions(data, labels = NULL, ...)
 
 \method{regressions}{draws}(
   data,
-  labels,
+  labels = NULL,
   ...,
   n_draws = 600,
   draws_prob = 0.95,
@@ -18,7 +18,7 @@ regressions(data, labels, ...)
   seed = 130821
 )
 
-\method{regressions}{land_types}(data, labels, ...)
+\method{regressions}{land_types}(data, labels = NULL, ...)
 }
 \arguments{
 \item{data}{A list of data produced by \code{\link[=make_regression_data]{make_regression_data()}}.}

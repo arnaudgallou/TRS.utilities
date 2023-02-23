@@ -6,8 +6,9 @@
 #'   explanatory variables.
 #' @param ... Other arguments passed to methods.
 #' @export
-regressions <- function(data, labels, ...) {
+regressions <- function(data, labels = NULL, ...) {
   colors <- regression_colors()
+  labels <- labels %||% make_labels(data)
   has_single_label <- length(labels) == 1L
   if (has_single_label) {
     plot_data <- data
@@ -39,7 +40,7 @@ regressions <- function(data, labels, ...) {
 #' @export
 regressions.draws <- function(
     data,
-    labels,
+    labels = NULL,
     ...,
     n_draws = 600,
     draws_prob = .95,
@@ -94,7 +95,7 @@ regressions.draws <- function(
 
 #' @rdname regressions
 #' @export
-regressions.land_types <- function(data, labels, ...) {
+regressions.land_types <- function(data, labels = NULL, ...) {
   plot +
     geom_ribbon(
       aes(
@@ -178,4 +179,9 @@ regression_theme <- function(has_single_label) {
       breaks = log(seq(0, 1400, 200))
     )
   )
+}
+
+make_labels <- function(x) {
+  out <- unique(x$data$expl_var)
+  set_names(out, out)
 }
