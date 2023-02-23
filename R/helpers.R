@@ -121,7 +121,6 @@ has_metachr <- function(x) {
 }
 
 to_chr_class <- function(vec, negate = FALSE) {
-  assert_that(is.character(vec))
   neg <- if (isTRUE(negate)) "^" else ""
   x <- paste(vec, collapse = "")
   x <- string_replace(x, r"{([-\\\[\]])}", r"{\\\1}")
