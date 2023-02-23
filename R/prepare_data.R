@@ -90,11 +90,11 @@ rescale <- function(x, scales) {
 
 relevel <- function(x, reverse) {
   data <- pick(.data[[x]])
-  levels <- unique(data$x)
+  levels <- unique(data[[x]])
   if (reverse) {
     levels <- rev(levels)
   }
-  factor(data$x, levels = levels)
+  factor(data[[x]], levels = levels)
 }
 
 relabel <- function(labels) {
