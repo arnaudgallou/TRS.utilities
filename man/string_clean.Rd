@@ -5,22 +5,10 @@
 \title{Remove non-letter characters, underscore and repeated whitespace inside
 a string}
 \usage{
-string_clean(
-  string,
-  rm_period = FALSE,
-  keep = NULL,
-  side = c("both", "left", "right")
-)
+string_clean(string)
 }
 \arguments{
 \item{string}{A character vector.}
-
-\item{rm_period}{Should ending periods be removed?}
-
-\item{keep}{A single character vector of character(s) to keep. Only retains
-characters that directly follow the first and last letter.}
-
-\item{side}{Side of the character string to trim. One of \code{c("both", "right", "left")}.}
 }
 \value{
 A character vector.

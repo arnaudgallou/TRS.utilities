@@ -52,56 +52,20 @@ string_remove <- function(string, pattern) {
   string_replace(string, pattern, "")
 }
 
-string_strip <- function(
-    string,
-    rm_period = FALSE,
-    keep = NULL,
-    side = c("both", "left", "right")
-) {
-  side <- match.arg(side)
-  trim <- "[^\\pL]+"
-  period <- if (is_true(rm_period)) "" else "(?!\\.)"
-
-  if (is.null(keep)) {
-    keep_left <- keep_right <- ""
-  } else {
-    keep <- to_chr_class(keep)
-    keep_left <- glue("(?<!{keep})")
-    keep_right <- glue("(?!{keep})")
-  }
-
-  left <- glue("^{trim}{keep_left}")
-  right <- glue("{period}{keep_right}{trim}$")
-  both <- glue("{left}|{right}")
-
-  pattern <- switch(side, "left" = left, "right" = right, "both" = both)
-  string_replace(string, pattern, "")
-}
-
 #' @title Remove non-letter characters, underscore and repeated whitespace inside
 #'   a string
 #' @description Remove any non-letter characters from the beginning and end of a
 #'   character string as well as underscores and repeated whitespaces inside a
 #'   string.
 #' @param string A character vector.
-#' @param rm_period Should ending periods be removed?
-#' @param keep A single character vector of character(s) to keep. Only retains
-#'   characters that directly follow the first and last letter.
-#' @param side Side of the character string to trim. One of `c("both", "right", "left")`.
 #' @return A character vector.
 #' @export
-string_clean <- function(
-    string,
-    rm_period = FALSE,
-    keep = NULL,
-    side = c("both", "left", "right")
-) {
+string_clean <- function(string) {
   patterns <- c(
     r"{\B_\B|(?<!['\"])(?<=[\p{Pe}\p{Po}])(?=\pL)|(?<=\pL)(?=[\p{Ps}&])}" = " ",
-    "_" = "",
+    "^[^\\pL]+|[^\\pL]+$|_" = "",
     "\\s+" = " "
   )
-  string <- string_strip(string, rm_period, keep, side)
   string_replace_all(string, patterns)
 }
 
