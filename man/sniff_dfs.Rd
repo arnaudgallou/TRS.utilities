@@ -11,7 +11,7 @@ sniff_dfs(
   merge = TRUE,
   clean_names = TRUE,
   ignore_case = TRUE,
-  .id = NULL
+  names_to = rlang::zap()
 )
 }
 \arguments{
@@ -29,7 +29,7 @@ in each file.}
 
 \item{ignore_case}{Should letter case be ignored?}
 
-\item{.id}{Either a string or NULL. See \code{\link[purrr:map_dfr]{purrr::map_df()}} for details.}
+\item{names_to}{Either a string or NULL. See \code{\link[purrr:map_dfr]{purrr::map_df()}} for details.}
 }
 \description{
 Wrapper around \code{\link[data.table:fread]{data.table::fread()}} to read multiple files.

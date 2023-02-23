@@ -8,7 +8,7 @@
 #' @param merge Should the data be merged in a single data frame?
 #' @param clean_names Should the column names be cleaned?
 #' @param ignore_case Should letter case be ignored?
-#' @param .id Either a string or NULL. See [`purrr::map_df()`] for details.
+#' @param names_to Either a string or NULL. See [`purrr::map_df()`] for details.
 #' @export
 sniff_dfs <- function(
     files,
@@ -17,21 +17,20 @@ sniff_dfs <- function(
     merge = TRUE,
     clean_names = TRUE,
     ignore_case = TRUE,
-    .id = NULL
+    names_to = rlang::zap()
 ) {
-  fn <- function(x, .rename = rename) {
-    x <- as_tibble(data.table::fread(x, ...))
-    if (!is.null(.rename)) {
-      x <- rename_with(x, \(nm) string_replace_all(nm, .rename, ignore_case))
+  out <- map(files, \(file) {
+    x <- as_tibble(data.table::fread(file, ...))
+    if (!is.null(rename)) {
+      x <- rename_with(x, \(nm) string_replace_all(nm, rename, ignore_case))
     }
     if (is_true(clean_names)) {
       x <- clean_names(x)
     }
     x
-  }
+  })
   if (is_false(merge)) {
-    return(map(files, fn))
+    return(out)
   }
-  out <- map(files, fn, .id = .id)
-  list_rbind(out)
+  list_rbind(out, names_to = names_to)
 }
