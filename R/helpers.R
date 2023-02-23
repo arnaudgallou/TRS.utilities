@@ -57,6 +57,15 @@ round_num <- function(x, digits = 2) {
   mutate(x, across(vars_select_helpers$where(is.double), round, digits))
 }
 
+#' @title Calculate the maximum difference
+#' @description Calculate the difference between the two most extreme values in
+#'   a numeric vector.
+#' @param x A numeric vector.
+#' @export
+calc_max_diff <- function(x) {
+  max(x, na.rm = TRUE) - min(x, na.rm = TRUE)
+}
+
 #' @title Parse formulas
 #' @description Extract terms from a formula.
 #' @param x A formula.
