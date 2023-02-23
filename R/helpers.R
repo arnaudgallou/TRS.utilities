@@ -67,6 +67,29 @@ parse_formula <- function(x) {
 }
 
 #' @title Parse numeric values from a string
+#' @description Extract numeric values from a character string.
+#' @param x A character string.
+#' @param as A character vector describing the type of output values. One of
+#'   `numeric`, `integer` or `character`.
+#' @param all Should all numeric values be extracted? By default, parses the first
+#'   numeric value.
+#' @export
+parse_num <- function(x, as = c("numeric", "integer", "character"), all = FALSE) {
+  as <- match.arg(as)
+  as <- switch(as, "numeric" = as.numeric, "integer" = as.integer, NULL)
+  extract_args <- list(string = x, pattern = "\\d+(?:[.,]\\d+)?")
+  if (isTRUE(all)) {
+    extract <- string_extract_all
+    extract_args <- c(extract_args, list(simplify = TRUE))
+  } else {
+    extract <- string_extract
+  }
+  x <- do.call(extract, extract_args)
+  x <- string_replace_all(x, c("," = "."))
+  if (is.null(as)) x else as(x)
+}
+
+#' @title Parse numeric values from a string
 #' @description Wrapper around [`dir.create()`] that creates directories recursively.
 #' @param path A character vector containing a single path name.
 #' @param ... Other arguments passed on to [`dir.create()`].
