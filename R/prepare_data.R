@@ -1,11 +1,11 @@
 #' @title Prepare data for regression plots
 #' @description Structure data for [`regressions()`].
 #' @param files Files to get data from.
-#' @param by_land_types Should estimates be calculated by land type?
+#' @param by_land_type Should estimates be calculated by land type?
 #' @export
-make_regression_data <- function(files, by_land_types = FALSE) {
+make_regression_data <- function(files, by_land_type = FALSE) {
   items <- c("data", "sims")
-  if (is_true(by_land_types)) {
+  if (is_true(by_land_type)) {
     nms <- "expl_var"
     cls <- "land_types"
   } else {
@@ -13,7 +13,7 @@ make_regression_data <- function(files, by_land_types = FALSE) {
     cls <- "draws"
   }
   out <- map(items, \(item) {
-    if (is_true(by_land_types) && item == "sims") {
+    if (is_true(by_land_type) && item == "sims") {
       return(calc_pred_conf(files))
     }
     read_jags(files, item, names_to = nms)

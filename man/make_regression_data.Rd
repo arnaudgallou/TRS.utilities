@@ -4,12 +4,12 @@
 \alias{make_regression_data}
 \title{Prepare data for regression plots}
 \usage{
-make_regression_data(files, by_land_types = FALSE)
+make_regression_data(files, by_land_type = FALSE)
 }
 \arguments{
 \item{files}{Files to get data from.}
 
-\item{by_land_types}{Should estimates be calculated by land type?}
+\item{by_land_type}{Should estimates be calculated by land type?}
 }
 \description{
 Structure data for \code{\link[=regressions]{regressions()}}.

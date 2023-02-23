@@ -39,7 +39,7 @@ GlobalAnalyses <- R6::R6Class(
     #'   `none`. Use `none` for data that were not standardized.
     #' @param labels A character vector used to label the x axis. See
     #'   [`regressions()`] for details.
-    #' @param by_land_types Should regressions be drawn for each land type?
+    #' @param by_land_type Should regressions be drawn for each land type?
     #' @param point_labels Should point labels be shown?
     regressions = function(
       vars,
@@ -47,7 +47,7 @@ GlobalAnalyses <- R6::R6Class(
       excl_zone = NULL,
       std_from = c("top", "bottom", "none"),
       labels = NULL,
-      by_land_types = FALSE,
+      by_land_type = FALSE,
       point_labels = FALSE
     ) {
       fls <- private$get_files(
@@ -57,7 +57,7 @@ GlobalAnalyses <- R6::R6Class(
         std_from,
         names = extract_expl_var
       )
-      data <- make_regression_data(fls, by_land_types)
+      data <- make_regression_data(fls, by_land_type)
       regressions(data, labels, point_labels = point_labels)
     },
 

@@ -64,7 +64,7 @@ Plot regression fits.
   excl_zone = NULL,
   std_from = c("top", "bottom", "none"),
   labels = NULL,
-  by_land_types = FALSE,
+  by_land_type = FALSE,
   point_labels = FALSE
 )}\if{html}{\out{</div>}}
 }
@@ -84,7 +84,7 @@ Plot regression fits.
 \item{\code{labels}}{A character vector used to label the x axis. See
 \code{\link[=regressions]{regressions()}} for details.}
 
-\item{\code{by_land_types}}{Should regressions be drawn for each land type?}
+\item{\code{by_land_type}}{Should regressions be drawn for each land type?}
 
 \item{\code{point_labels}}{Should point labels be shown?}
 }
