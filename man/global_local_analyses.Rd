@@ -154,9 +154,9 @@ Compare multiple JAGS models using the WAIC and leave-one-out
 cross-validation methods.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{GlobalAnalyses$eval_models(
-  vars = c("dtr", "ts", "past_dmat"),
-  elev_span = NULL,
-  excl_zone = NULL,
+  vars = "all",
+  elev_span = 2500,
+  excl_zone = 250,
   std_from = c("top", "bottom", "none")
 )}\if{html}{\out{</div>}}
 }
@@ -187,7 +187,7 @@ Compute Bayesian R-squared and the probability of posterior
 fits to be lower than 0
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{GlobalAnalyses$get_statistical_details(
-  vars = c("dtr", "ts", "past_dmat"),
+  vars = "all",
   elev_span = NULL,
   excl_zone = NULL,
   std_from = c("top", "bottom", "none")

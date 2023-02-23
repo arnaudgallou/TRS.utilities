@@ -134,9 +134,9 @@ GlobalAnalyses <- R6::R6Class(
     #'   `none`. Use `none` for data that were not standardized.
     #' @return A tibble.
     eval_models = function(
-      vars = c("dtr", "ts", "past_dmat"),
-      elev_span = NULL,
-      excl_zone = NULL,
+      vars = "all",
+      elev_span = 2500,
+      excl_zone = 250,
       std_from = c("top", "bottom", "none")
     ) {
       fls <- private$get_files(vars, elev_span, excl_zone, std_from)
@@ -153,7 +153,7 @@ GlobalAnalyses <- R6::R6Class(
     #'   `none`. Use `none` for data that were not standardized.
     #' @return A tibble.
     get_statistical_details = function(
-      vars = c("dtr", "ts", "past_dmat"),
+      vars = "all",
       elev_span = NULL,
       excl_zone = NULL,
       std_from = c("top", "bottom", "none")
@@ -188,6 +188,7 @@ GlobalAnalyses <- R6::R6Class(
       ...
     ) {
       std_from <- match.arg(std_from)
+      vars <- if (vars == "all") ".+" else vars
       elev_span <- elev_span %||% "[^-]+"
       excl_zone <- excl_zone %||% "[^-]+"
       vars <- paste(vars, collapse = "|")
