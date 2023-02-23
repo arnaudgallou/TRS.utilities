@@ -34,4 +34,5 @@ Imports:
     utils,
     colorspace,
     tidyselect,
-    data.table
+    data.table,
+    R6
