@@ -52,7 +52,7 @@ make_posterior_data <- function(
     files,
     yvar,
     prob = c(.8, .95),
-    prob_outer = 0.99,
+    prob_outer = .99,
     scales = .01,
     labels = NULL,
     reverse = FALSE
