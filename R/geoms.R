@@ -59,7 +59,7 @@ posterior_distributions <- function(
     ymax = .data$ymax * scale
   )
 
-  plot <- ggplot(x, mapping) +
+  plot <- ggplot(x, mapping, ...) +
     line_0(linetype = vline_type, color = vline_color) +
     map2(
       den_mass,
