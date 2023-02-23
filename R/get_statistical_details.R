@@ -20,9 +20,9 @@ calc_jags_r2 <- function(x, posteriors) {
   terms <- parse_formula(formula)
   is_land_type <- any(grepl("land_type", terms))
   if (length(terms) == 1L) {
-    formula <- ~ term
+    formula <- ~ x
   } else if (is_land_type) {
-    formula <- ~ term * land_type
+    formula <- ~ x * land_type
   } else {
     formula <- formula
   }
