@@ -43,7 +43,7 @@ run_jags <- function(
 make_jags_output <- function(x, mdl_name, fit) {
   terms <- x$settings$terms
   vars <- terms[!grepl("land_type", terms)]
-  expl_vars <- set_names(terms, paste0("expl_var", name_suffix(terms)))
+  expl_vars <- setNames(terms, paste0("expl_var", name_suffix(terms)))
   sims <- jags_array_to_tibble(fit$BUGSoutput$sims.array)
   tbl_data <- tbl_elev_grad_clim <- NULL
   if (mdl_name == "global_scale_mdl") {

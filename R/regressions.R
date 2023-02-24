@@ -183,5 +183,5 @@ regression_theme <- function(has_single_label) {
 
 make_labels <- function(x) {
   out <- unique(x$data$expl_var)
-  set_names(out, out)
+  setNames(out, out)
 }

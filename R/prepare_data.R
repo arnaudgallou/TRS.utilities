@@ -18,7 +18,7 @@ make_regression_data <- function(files, by_land_type = FALSE) {
     }
     read_jags(files, item, names_to = nms)
   })
-  out <- set_names(out, items)
+  out <- setNames(out, items)
   structure(out, class = c(cls, "list"))
 }
 
