@@ -5,34 +5,30 @@
 #' @export
 make_regression_data <- function(files, by_land_type = FALSE) {
   items <- c("data", "sims")
-  if (is_true(by_land_type)) {
-    nms <- "expl_var"
-    cls <- "land_types"
-  } else {
-    nms <- zap()
-    cls <- "draws"
-  }
+  cls <- if (is_true(by_land_type)) "land_types" else "draws"
   out <- map(items, \(item) {
     if (is_true(by_land_type) && item == "sims") {
       return(calc_pred_conf(files))
     }
-    read_jags(files, item, names_to = nms)
+    read_jags(files, item)
   })
   out <- setNames(out, items)
   structure(out, class = c(cls, "list"))
 }
 
 calc_pred_conf <- function(files) {
-  out <- imap(files, \(file, expl_var) {
+  out <- map(files, \(file) {
     data <- read_rds(file)
     fit <- get_jags_sims(data, "beta")
+    expl_var <- data$settings$terms[[1]]
+    settings <- select(data$data, expl_var:elevation_span, any_of("std_from"))
     out <- pluck(data, "elev_grad_clim")
     out <- group_by(out, .data$land_type)
     suppressWarnings(
       out <- modelr::data_grid(
         out,
         value = modelr::seq_range(.data[[expl_var]], n = 100),
-        expl_var = expl_var
+        distinct(settings)
       )
     )
     out <- ungroup(out)

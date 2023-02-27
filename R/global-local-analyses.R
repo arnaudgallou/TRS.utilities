@@ -52,13 +52,7 @@ GlobalAnalyses <- R6::R6Class(
       by_land_type = FALSE,
       point_labels = FALSE
     ) {
-      fls <- private$get_files(
-        vars,
-        elev_span,
-        excl_zone,
-        std_from,
-        names = extract_expl_var
-      )
+      fls <- private$get_files(vars, elev_span, excl_zone, std_from)
       data <- make_regression_data(fls, by_land_type)
       regressions(data, facet_by, labels, point_labels = point_labels)
     },
@@ -206,10 +200,6 @@ GlobalAnalyses <- R6::R6Class(
     }
   )
 )
-
-extract_expl_var = function(x) {
-  string_extract(basename(x), "^[^-]+")
-}
 
 
 #' @rdname global_local_analyses
