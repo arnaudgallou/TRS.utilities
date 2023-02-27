@@ -1,22 +1,29 @@
 #' @title Plot regression fits
 #' @description Plot regression fits.
 #' @param data A list of data produced by [`make_regression_data()`].
-#' @param facet_by Variable defining faceting groups.
+#' @param facet_cols Variable defining faceting groups on the columns dimension.
+#' @param facet_rows Variable defining faceting groups on the rows dimension.
 #' @param labels A character vector used to label the x axis. If `labels` contains
 #'   several labels, each label must be named. Names must be the same as the
 #'   explanatory variables.
 #' @param ... Other arguments passed to methods.
 #' @export
-regressions <- function(data, facet_by = "expl_var", labels = NULL, ...) {
+regressions <- function(
+    data,
+    facet_cols = "expl_var",
+    facet_rows = "exclusion_zone",
+    labels = NULL,
+    ...
+) {
   colors <- regression_colors()
-  facet_vars <- get_facet_vars(data, facet_by)
+  facet_vars <- get_facet_vars(data, facet_cols)
   n_facets <- length(facet_vars)
   n_labels <- length(labels)
   is_faceted <- n_facets > 1L
   if (is_faceted && all(have_name(labels)) && n_labels == n_facets) {
     labellers <- labels
     plot_data <- map(data, \(x) {
-      mutate(x, !!facet_by := factor(.data[[facet_by]], levels = names(labels)))
+      mutate(x, !!facet_cols := factor(.data[[facet_cols]], levels = names(labels)))
     })
   } else {
     labellers <- facet_vars
@@ -25,8 +32,8 @@ regressions <- function(data, facet_by = "expl_var", labels = NULL, ...) {
   plot <- ggplot(plot_data$data, aes(x = .data$x, y = .data$est_range_mean))
   if (is_faceted) {
     plot <- plot + facet_grid(
-      rows = vars(.data$exclusion_zone),
-      cols = vars(.data[[facet_by]]),
+      rows = vars(.data[[facet_rows]]),
+      cols = vars(.data[[facet_cols]]),
       scales = "free",
       switch = "x",
       labeller = labeller(.cols = labellers)
@@ -46,7 +53,8 @@ regressions <- function(data, facet_by = "expl_var", labels = NULL, ...) {
 #' @export
 regressions.draws <- function(
     data,
-    facet_by = "expl_var",
+    facet_cols = "expl_var",
+    facet_rows = "exclusion_zone",
     labels = NULL,
     ...,
     n_draws = 600,
@@ -54,7 +62,7 @@ regressions.draws <- function(
     point_labels = FALSE,
     seed = 130821
 ) {
-  draws <- group_by(plot_data$sims, .data[[facet_by]], .data$exclusion_zone)
+  draws <- group_by(plot_data$sims, .data[[facet_cols]], .data[[facet_rows]])
   draws <- slice_draws(draws, .data$beta_2, draws_prob, n_draws, seed = seed)
   mean_draws <- summarize(
     draws,
@@ -102,7 +110,13 @@ regressions.draws <- function(
 
 #' @rdname regressions
 #' @export
-regressions.land_types <- function(data, facet_by = "expl_var", labels = NULL, ...) {
+regressions.land_types <- function(
+    data,
+    facet_cols = "expl_var",
+    facet_rows = "exclusion_zone",
+    labels = NULL,
+    ...
+) {
   plot +
     geom_ribbon(
       aes(
@@ -188,7 +202,7 @@ regression_theme <- function(n_labels) {
   )
 }
 
-get_facet_vars <- function(x, facet_by) {
-  out <- unique(x$data[[facet_by]])
+get_facet_vars <- function(x, facet_cols) {
+  out <- unique(x$data[[facet_cols]])
   setNames(out, out)
 }

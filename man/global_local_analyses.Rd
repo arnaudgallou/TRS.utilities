@@ -63,7 +63,8 @@ Plot regression fits.
   elev_span = NULL,
   excl_zone = NULL,
   std_from = c("top", "bottom", "none"),
-  facet_by = "expl_var",
+  facet_cols = "expl_var",
+  facet_rows = "exclusion_zone",
   labels = NULL,
   by_land_type = FALSE,
   point_labels = FALSE
@@ -82,7 +83,10 @@ Plot regression fits.
 \item{\code{std_from}}{Edge of elevational gradients to use. One of \code{top}, \code{bottom},
 \code{none}. Use \code{none} for data that were not standardized.}
 
-\item{\code{facet_by}}{Variable defining faceting groups.}
+\item{\code{facet_cols}}{Variable defining faceting groups on the columns
+dimension.}
+
+\item{\code{facet_rows}}{Variable defining faceting groups on the rows dimension.}
 
 \item{\code{labels}}{A character vector used to label the x axis. See
 \code{\link[=regressions]{regressions()}} for details.}
