@@ -127,7 +127,7 @@ regressions.land_types <- function(data, facet_by = "expl_var", labels = NULL, .
       size = .3
     ) +
     regression_points(colors) +
-    plot + regression_theme(n_labels)
+    regression_theme(n_labels)
 }
 
 regression_colors <- function() {
