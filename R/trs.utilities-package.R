@@ -16,7 +16,7 @@
 #' @importFrom ggplot2 geom_abline geom_line geom_vline geom_hline geom_segment
 #' @importFrom ggplot2 geom_point geom_errorbar geom_histogram
 #' @importFrom ggplot2 geom_ribbon geom_smooth
-#' @importFrom ggplot2 facet_wrap facet_grid as_labeller label_parsed
+#' @importFrom ggplot2 facet_wrap facet_grid labeller label_parsed
 #' @importFrom ggplot2 scale_color_manual scale_colour_brewer scale_fill_manual
 #' @importFrom ggplot2 scale_shape_manual scale_y_continuous scale_alpha_manual
 #' @importFrom ggplot2 theme theme_classic element_blank element_text element_line
