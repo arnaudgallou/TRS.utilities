@@ -37,6 +37,7 @@ GlobalAnalyses <- R6::R6Class(
     #' @param excl_zone Length of exclusion zones to use.
     #' @param std_from Edge of elevational gradients to use. One of `top`, `bottom`,
     #'   `none`. Use `none` for data that were not standardized.
+    #' @param facet_by Variable defining faceting groups.
     #' @param labels A character vector used to label the x axis. See
     #'   [`regressions()`] for details.
     #' @param by_land_type Should regressions be drawn for each land type?
@@ -46,6 +47,7 @@ GlobalAnalyses <- R6::R6Class(
       elev_span = NULL,
       excl_zone = NULL,
       std_from = c("top", "bottom", "none"),
+      facet_by = "expl_var",
       labels = NULL,
       by_land_type = FALSE,
       point_labels = FALSE
@@ -58,7 +60,7 @@ GlobalAnalyses <- R6::R6Class(
         names = extract_expl_var
       )
       data <- make_regression_data(fls, by_land_type)
-      regressions(data, labels, point_labels = point_labels)
+      regressions(data, facet_by, labels, point_labels = point_labels)
     },
 
     #' @description Plot posterior distribution from a bayesian model.

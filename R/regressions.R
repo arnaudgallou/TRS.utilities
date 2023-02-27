@@ -1,33 +1,39 @@
 #' @title Plot regression fits
 #' @description Plot regression fits.
 #' @param data A list of data produced by [`make_regression_data()`].
+#' @param facet_by Variable defining faceting groups.
 #' @param labels A character vector used to label the x axis. If `labels` contains
 #'   several labels, each label must be named. Names must be the same as the
 #'   explanatory variables.
 #' @param ... Other arguments passed to methods.
 #' @export
-regressions <- function(data, labels = NULL, ...) {
+regressions <- function(data, facet_by = "expl_var", labels = NULL, ...) {
   colors <- regression_colors()
-  labels <- labels %||% make_labels(data)
-  has_single_label <- length(labels) == 1L
-  if (has_single_label) {
-    plot_data <- data
-  } else {
+  facet_vars <- get_facet_vars(data, facet_by)
+  n_facets <- length(facet_vars)
+  n_labels <- length(labels)
+  is_faceted <- n_facets > 1L
+  if (is_faceted && all(have_name(labels)) && n_labels == n_facets) {
+    labellers <- labels
     plot_data <- map(data, \(x) {
-      mutate(x, expl_var = factor(.data$expl_var, levels = names(labels)))
+      mutate(x, !!facet_by := factor(.data[[facet_by]], levels = names(labels)))
     })
+  } else {
+    labellers <- facet_vars
+    plot_data <- data
   }
   plot <- ggplot(plot_data$data, aes(x = .data$x, y = .data$est_range_mean))
-  if (has_single_label) {
-    plot <- plot + xlab(labels)
-  } else {
+  if (is_faceted) {
     plot <- plot + facet_grid(
       rows = vars(.data$exclusion_zone),
-      cols = vars(.data$expl_var),
+      cols = vars(.data[[facet_by]]),
       scales = "free",
       switch = "x",
-      labeller = as_labeller(labels)
+      labeller = labeller(.cols = labellers)
     )
+  }
+  if (n_labels == 1L) {
+    plot <- plot + xlab(labels)
   }
   UseMethod("regressions")
 }
@@ -40,6 +46,7 @@ regressions <- function(data, labels = NULL, ...) {
 #' @export
 regressions.draws <- function(
     data,
+    facet_by = "expl_var",
     labels = NULL,
     ...,
     n_draws = 600,
@@ -47,7 +54,7 @@ regressions.draws <- function(
     point_labels = FALSE,
     seed = 130821
 ) {
-  draws <- group_by(plot_data$sims, .data$expl_var, .data$exclusion_zone)
+  draws <- group_by(plot_data$sims, .data[[facet_by]], .data$exclusion_zone)
   draws <- slice_draws(draws, .data$beta_2, draws_prob, n_draws, seed = seed)
   mean_draws <- summarize(
     draws,
@@ -90,12 +97,12 @@ regressions.draws <- function(
         show.legend = FALSE
       )
   }
-  plot + regression_theme(has_single_label)
+  plot + regression_theme(n_labels)
 }
 
 #' @rdname regressions
 #' @export
-regressions.land_types <- function(data, labels = NULL, ...) {
+regressions.land_types <- function(data, facet_by = "expl_var", labels = NULL, ...) {
   plot +
     geom_ribbon(
       aes(
@@ -120,7 +127,7 @@ regressions.land_types <- function(data, labels = NULL, ...) {
       size = .3
     ) +
     regression_points(colors) +
-    regression_theme(has_single_label)
+    plot + regression_theme(n_labels)
 }
 
 regression_colors <- function() {
@@ -155,8 +162,8 @@ regression_points <- function(colors, point_labels = FALSE) {
   )
 }
 
-regression_theme <- function(has_single_label) {
-  if (has_single_label) {
+regression_theme <- function(n_labels) {
+  if (n_labels == 1L) {
     strip.text.x <- element_blank()
     axis.title.x <- element_text()
   } else {
@@ -170,7 +177,7 @@ regression_theme <- function(has_single_label) {
       strip.placement = "outside",
       strip.text.y = element_blank(),
       strip.text.x = strip.text.x,
-      axis.title.x = if (!has_single_label) element_blank()
+      axis.title.x = axis.title.x
     ),
     add_facet_lines(),
     scale_y_continuous(
@@ -181,7 +188,7 @@ regression_theme <- function(has_single_label) {
   )
 }
 
-make_labels <- function(x) {
-  out <- unique(x$data$expl_var)
+get_facet_vars <- function(x, facet_by) {
+  out <- unique(x$data[[facet_by]])
   setNames(out, out)
 }
