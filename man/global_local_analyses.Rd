@@ -144,7 +144,7 @@ Plot posterior distribution from a bayesian model.
 
 \item{\code{facet}}{Should the plot be facetted?}
 
-\item{\code{fill}}{A vector of colors to use for filling posterior distributions.}
+\item{\code{fill}}{A vector of colors used to fill posterior distributions.}
 }
 \if{html}{\out{</div>}}
 }

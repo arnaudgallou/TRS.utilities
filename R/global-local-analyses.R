@@ -78,7 +78,7 @@ GlobalAnalyses <- R6::R6Class(
     #'   [`posterior_distributions()`] for details.
     #' @param reverse Should the order of posterior distributions be reversed?
     #' @param facet Should the plot be facetted?
-    #' @param fill A vector of colors to use for filling posterior distributions.
+    #' @param fill A vector of colors used to fill posterior distributions.
     posterior_distributions = function(
       vars,
       elev_span = NULL,
