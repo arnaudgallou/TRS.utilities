@@ -6,10 +6,11 @@
 \alias{regressions.land_types}
 \title{Plot regression fits}
 \usage{
-regressions(data, labels = NULL, ...)
+regressions(data, facet_by = "expl_var", labels = NULL, ...)
 
 \method{regressions}{draws}(
   data,
+  facet_by = "expl_var",
   labels = NULL,
   ...,
   n_draws = 600,
@@ -18,10 +19,12 @@ regressions(data, labels = NULL, ...)
   seed = 130821
 )
 
-\method{regressions}{land_types}(data, labels = NULL, ...)
+\method{regressions}{land_types}(data, facet_by = "expl_var", labels = NULL, ...)
 }
 \arguments{
 \item{data}{A list of data produced by \code{\link[=make_regression_data]{make_regression_data()}}.}
+
+\item{facet_by}{Variable defining faceting groups.}
 
 \item{labels}{A character vector used to label the x axis. If \code{labels} contains
 several labels, each label must be named. Names must be the same as the
