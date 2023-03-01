@@ -16,7 +16,7 @@ NULL
 theme_elesic <- function(
     base_size = 11,
     base_family = "",
-    base_line_size = .25,
+    base_line_size = .5,
     base_rect_size = base_size / 22,
     base_axis_color = "black",
     legend_position = "none"
@@ -47,7 +47,7 @@ theme_elesic <- function(
 theme_blank_y <- function(
     base_size = 11,
     base_family = "",
-    base_line_size = .25,
+    base_line_size = .5,
     base_rect_size = base_size / 22,
     base_axis_color = "black",
     legend_position = "none"
