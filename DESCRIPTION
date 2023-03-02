@@ -28,12 +28,13 @@ Imports:
     broom.mixed,
     ggridges,
     bayestestR,
-    terra,
-    bayesplot,
     modelr,
     utils,
     colorspace,
     tidyselect,
-    data.table,
     R6,
     ggh4x
+Suggests: 
+    bayesplot (>= 1.9.0),
+    data.table (>= 1.14.2),
+    terra (>= 1.6.7)
