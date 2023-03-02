@@ -21,7 +21,11 @@ calc_pred_conf <- function(files) {
     data <- read_rds(file)
     fit <- get_jags_sims(data, "beta")
     expl_var <- data$settings$terms[[1]]
-    settings <- select(data$data, expl_var:elevation_span, any_of("std_from"))
+    settings <- select(
+      data$data,
+      data$expl_var:data$elevation_span,
+      any_of("std_from")
+    )
     out <- pluck(data, "elev_grad_clim")
     out <- group_by(out, .data$land_type)
     suppressWarnings(
