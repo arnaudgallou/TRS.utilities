@@ -37,6 +37,7 @@ regressions <- function(
       scales = "free",
       switch = "x",
       axes = "all",
+      remove_labels = TRUE,
       labeller = labeller(.cols = labellers)
     )
   }

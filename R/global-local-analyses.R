@@ -227,7 +227,8 @@ LocalAnalyses <- R6::R6Class(
           rows = vars(.data$exclusion_zone),
           cols = vars(.data$expl_var),
           scales = "free_y",
-          axes = "all"
+          axes = "all",
+          remove_labels = TRUE
         ) +
         geom_histogram(
           position = "identity",
@@ -264,7 +265,11 @@ LocalAnalyses <- R6::R6Class(
         fill = .data$expl_var,
         alpha = .data$expl_var
       )) +
-        ggh4x::facet_wrap2(vars(.data$expl_var), axes = "all") +
+        ggh4x::facet_wrap2(
+          vars(.data$expl_var),
+          axes = "all",
+          remove_labels = TRUE
+        ) +
         line_0("y") +
         geom_smooth(method = "lm", size = .5, color = "#85A9D6", fill = "#85A9D6") +
         scale_alpha_manual(values = rep(.15, n_facets)) +

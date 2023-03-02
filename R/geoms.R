@@ -72,7 +72,8 @@ traceplot <- function(x, mapping = aes(), facets) {
       ncol = 1,
       scales = "free_y",
       strip.position = "left",
-      axes = "all"
+      axes = "all",
+      remove_labels = TRUE
     ) +
     geom_line() +
     scale_colour_brewer(direction = -1) +
