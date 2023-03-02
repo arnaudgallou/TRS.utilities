@@ -23,7 +23,7 @@ calc_pred_conf <- function(files) {
     expl_var <- data$settings$terms[[1]]
     settings <- select(
       data$data,
-      data$expl_var:data$elevation_span,
+      .data$expl_var:.data$elevation_span,
       any_of("std_from")
     )
     out <- pluck(data, "elev_grad_clim")
