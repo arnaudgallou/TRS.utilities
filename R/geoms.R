@@ -35,7 +35,7 @@ line_0 <- function(
 #' @param vline_type Line type of the line indicating 0.
 #' @param vline_color Color of the line indicating 0.
 #' @param facet_args A named list of parameters and arguments to pass on to
-#'   [`ggplot2::facet_grid()`].
+#'   [`ggh4x::facet_grid2()`].
 #' @param ... Other arguments passed on to [`ggplot2::ggplot()`].
 #' @export
 posterior_distributions <- function(
@@ -92,22 +92,10 @@ posterior_distributions <- function(
     theme(legend.position = "none")
 
   if (!is_empty(facet_args)) {
-    plot <- plot + do.call(facet_grid, facet_args)
+    plot <- plot + do.call(ggh4x::facet_grid2, facet_args)
   }
 
   plot
-}
-
-#' @title Add axis lines to facetted plots
-#' @description Draw axis lines to facetted plots.
-#' @param size Line size (in mm).
-#' @export
-add_facet_lines <- function(size = 1) {
-  list(
-    theme(axis.line = element_blank()),
-    geom_vline(xintercept = -Inf, size = size),
-    geom_hline(yintercept = -Inf, size = size)
-  )
 }
 
 #' @title Posterior predictive checks
@@ -152,11 +140,12 @@ ppc_ <- function(y, yrep, all = FALSE, ...) {
 #' @export
 traceplot <- function(x, mapping = aes(), facets) {
   ggplot(x, mapping) +
-    facet_wrap(
+    ggh4x::facet_wrap2(
       facets,
       ncol = 1,
       scales = "free_y",
-      strip.position = "left"
+      strip.position = "left",
+      axes = "all"
     ) +
     geom_line() +
     scale_colour_brewer(direction = -1) +

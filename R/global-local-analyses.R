@@ -223,10 +223,11 @@ LocalAnalyses <- R6::R6Class(
     slope_histograms = function(excl_zone = NULL) {
       out <- private$get_data_summary(excl_zone, extend_summary = TRUE)
       ggplot(out, aes(.data$beta_std, fill = .data$x95_ci)) +
-        facet_grid(
+        ggh4x::facet_grid2(
           rows = vars(.data$exclusion_zone),
           cols = vars(.data$expl_var),
-          scales = "free_y"
+          scales = "free_y",
+          axes = "all"
         ) +
         geom_histogram(
           position = "identity",
@@ -239,8 +240,7 @@ LocalAnalyses <- R6::R6Class(
         scale_y_continuous(breaks = seq(0, 12, 3)) +
         labs(x = "Mean slopes / SD slopes", y = "Count") +
         coord_cartesian(expand = FALSE) +
-        theme_elesic() +
-        add_facet_lines()
+        theme_elesic()
     },
 
     #' @description Plot the influence of elevation span on slope direction within
@@ -264,7 +264,7 @@ LocalAnalyses <- R6::R6Class(
         fill = .data$expl_var,
         alpha = .data$expl_var
       )) +
-        facet_wrap(vars(.data$expl_var)) +
+        ggh4x::facet_wrap2(vars(.data$expl_var), axes = "all") +
         line_0("y") +
         geom_smooth(method = "lm", size = .5, color = "#85A9D6", fill = "#85A9D6") +
         scale_alpha_manual(values = rep(.15, n_facets)) +
@@ -272,8 +272,7 @@ LocalAnalyses <- R6::R6Class(
           x = "Elevational gradient length (m)",
           y = "Mean slopes / SD slopes"
         ) +
-        theme_elesic() +
-        add_facet_lines()
+        theme_elesic()
     },
 
     #' @description Summarize the proportion of positive and negative slopes based

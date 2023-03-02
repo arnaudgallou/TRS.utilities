@@ -31,11 +31,12 @@ regressions <- function(
   }
   plot <- ggplot(plot_data$data, aes(x = .data$x, y = .data$est_range_mean))
   if (is_faceted) {
-    plot <- plot + facet_grid(
+    plot <- plot + ggh4x::facet_grid2(
       rows = vars(.data[[facet_rows]]),
       cols = vars(.data[[facet_cols]]),
       scales = "free",
       switch = "x",
+      axes = "all",
       labeller = labeller(.cols = labellers)
     )
   }
@@ -193,7 +194,6 @@ regression_theme <- function(n_labels) {
       strip.text.x = strip.text.x,
       axis.title.x = axis.title.x
     ),
-    add_facet_lines(),
     scale_y_continuous(
       name = "Mean species range (m)",
       labels = \(x) round(exp(x)),

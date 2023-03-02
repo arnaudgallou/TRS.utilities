@@ -28,7 +28,7 @@ See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
 \item{vline_color}{Color of the line indicating 0.}
 
 \item{facet_args}{A named list of parameters and arguments to pass on to
-\code{\link[ggplot2:facet_grid]{ggplot2::facet_grid()}}.}
+\code{\link[ggh4x:facet_grid2]{ggh4x::facet_grid2()}}.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.}
 }

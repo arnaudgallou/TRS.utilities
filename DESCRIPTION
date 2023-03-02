@@ -35,4 +35,5 @@ Imports:
     colorspace,
     tidyselect,
     data.table,
-    R6
+    R6,
+    ggh4x
