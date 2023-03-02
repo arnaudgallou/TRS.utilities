@@ -29,6 +29,5 @@
 #' @importFrom stats sd density median quantile var model.matrix setNames
 #' @importFrom janitor clean_names make_clean_names
 #' @importFrom glue glue
-#' @importFrom utils modifyList
 #' @importFrom colorspace darken
 "_PACKAGE"
