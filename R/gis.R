@@ -40,11 +40,11 @@ rs_extract <- function(...) terra::extract(...)
 #' @export
 rs_crop <- function(...) terra::crop(...)
 
-#' @title Reproject a spatial object
-#' @description Alias for [`terra::project`].
-#' @param ... Arguments to pass on to [`terra::project()`].
+#' @title Resample a spatial object
+#' @description Alias for [`terra::resample`].
+#' @param ... Arguments to pass on to [`terra::resample()`].
 #' @export
-rs_project <- function(...) terra::project(...)
+rs_resample <- function(...) terra::resample(...)
 
 #' @title Compute zonal statistics
 #' @description Alias for [`terra::zonal`].
