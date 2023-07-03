@@ -4,7 +4,7 @@
 \alias{rs_set_crs}
 \title{Set the coordinate reference system of a raster object}
 \usage{
-rs_set_crs(x, proj = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0")
+rs_set_crs(x, proj = WGS84)
 }
 \arguments{
 \item{x}{A aster object.}

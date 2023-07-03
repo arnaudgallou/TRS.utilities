@@ -107,15 +107,17 @@ rs_read_stk <- function(file, layer_names = NULL) {
   setNames(x, layer_names)
 }
 
+#' @title WGS84 coordinate reference system
+#' @description WGS84 coordinate reference system.
+#' @export
+WGS84 <- "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
+
 #' @title Set the coordinate reference system of a raster object
 #' @description Set the coordinate reference system of a raster object.
 #' @param x A aster object.
 #' @param proj Projection to set to the raster object.
 #' @export
-rs_set_crs <- function(
-    x,
-    proj = "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
-) {
+rs_set_crs <- function(x, proj = WGS84) {
   terra::crs(x) <- proj
   x
 }
