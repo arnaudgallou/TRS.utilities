@@ -1,3 +1,8 @@
+#' @title Create directories for GIS analyses
+#' @description Create the required directories to run the GIS analyses in
+#' [Diurnal temperature range as a key predictor of plants' elevation ranges globally]
+#' (https://github.com/arnaudgallou/TRS)
+#' @export
 setup_gis <- function() {
   proj <- "TRS.Rproj"
   trs <- "data/trs.csv"
