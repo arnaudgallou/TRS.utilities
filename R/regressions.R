@@ -151,7 +151,7 @@ regression_colors <- function() {
     draws = "#b6d3e2",
     mean_draw = "#006699",
     points = c("#737373", "#ffffff"),
-    labels = c("#e34326", "#3176a9"),
+    labels = c("#e34326", "#3051b5"),
     ribbons = c("#f57a5b", "#85a9d6")
   )
 }
@@ -174,7 +174,10 @@ regression_points <- function(colors, point_labels = FALSE) {
     scale_fill_manual(
       name = "Land type",
       values = if (point_labels) colors$labels else colors$points
-    )
+    ),
+    if (point_labels) {
+      scale_color_manual(name = "Land type", values = colors$labels)
+    }
   )
 }
 
