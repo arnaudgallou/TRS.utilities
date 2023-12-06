@@ -22,12 +22,6 @@ rs_read.collection <- function(x, ...) {
   out
 }
 
-#' @title Get or set the extent of a raster object
-#' @description Alias for [`terra::ext`].
-#' @param ... Arguments to pass on to [`terra::ext()`].
-#' @export
-rs_extent <- function(...) terra::ext(...)
-
 #' @title Extract values from a raster object
 #' @description Alias for [`terra::extract`].
 #' @param ... Arguments to pass on to [`terra::extract()`].
@@ -63,7 +57,7 @@ rs_vect <- function(...) terra::vect(...)
 #' @param x A raster object.
 #' @export
 rs_ext_to_polygon <- function(x) {
-  x <- rs_extent(x)
+  x <- terra::ext(x)
   x <- terra::as.polygons(x)
   rs_set_crs(x)
 }
@@ -94,17 +88,6 @@ rs_reclass <- function(x, binwidth = 100, right = FALSE, col_name = "zone", ...)
   new_values <- tibble(lower = s, upper = s + binwidth, new = s)
   x <- terra::classify(x, new_values, right = right, ...)
   setNames(x, col_name)
-}
-
-#' @title Read a multi-layer raster file
-#' @description Read a multi-layer raster file.
-#' @param file A file containing a raster stack.
-#' @param layer_names A character vector containing the names to assign to each
-#'   raster layer.
-#' @export
-rs_read_stk <- function(file, layer_names = NULL) {
-  x <- terra::rast(file)
-  setNames(x, layer_names)
 }
 
 #' @title WGS84 coordinate reference system

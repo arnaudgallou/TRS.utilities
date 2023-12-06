@@ -26,12 +26,10 @@ slice_draws <- function(x, estimates, prob = .95, n = 200, seed) {
 }
 
 
-#' @title Add the lowest and highest quantile values to a data frame
-#' @description Add the lowest and highest quantile values to a data frame.
-#' @param x A data frame.
-#' @param var Column of numeric values to compute quantiles from.
-#' @param prob The probability mass to get the lowest and highest quantiles from.
-#' @export
+# Add the lowest and highest quantile values to a data frame
+# @param x A data frame.
+# @param var Column of numeric values to compute quantiles from.
+# @param prob The probability mass to get the lowest and highest quantiles from.
 add_quantiles <- function(x, var, prob = .95) {
   mutate(
     x,

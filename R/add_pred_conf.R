@@ -1,11 +1,9 @@
-#' @title Add predictions from the posterior fit to a data frame
-#' @description Add the posterior predictive with standard deviation and confidence
-#'   from a JAGS model to a data frame.
-#' @param x A data frame.
-#' @param fit A JAGS model fit.
-#' @param formula Formula containing group-level effects to be considered in the
-#'   prediction.
-#' @export
+# Add the posterior predictive with standard deviation and confidence from a
+#   JAGS model to a data frame.
+# @param data A data frame.
+# @param fit A JAGS model fit.
+# @param formula Formula containing group-level effects to be considered in the
+#   prediction.
 add_pred_conf <- function(x, fit, formula) {
   model_matrix <- model.matrix(formula, x)
   new_fit <- as.matrix(fit) %*% t(model_matrix)

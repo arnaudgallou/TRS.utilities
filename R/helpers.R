@@ -66,11 +66,6 @@ calc_max_diff <- function(x) {
   max(x, na.rm = TRUE) - min(x, na.rm = TRUE)
 }
 
-#' @title Parse formulas
-#' @description Extract terms from a formula.
-#' @param x A formula.
-#' @return A character vector.
-#' @export
 parse_formula <- function(x) {
   string_extract_all(deparse(x), "\\w+")
 }
@@ -98,20 +93,10 @@ parse_num <- function(x, as = c("numeric", "integer", "character"), all = FALSE)
   if (is.null(as)) x else as(x)
 }
 
-#' @title Parse numeric values from a string
-#' @description Wrapper around [`dir.create()`] that creates directories recursively.
-#' @param path A character vector containing a single path name.
-#' @param ... Other arguments passed on to [`dir.create()`].
-#' @export
 make_dir <- function(path, ...) {
   dir.create(path, recursive = TRUE, ...)
 }
 
-#' @title Create named lists dynamically
-#' @description Wrapper around [`dots_list()`][rlang::dots_list] with
-#'   `.named = TRUE` as default.
-#' @param ... Objects to pass on to [`dots_list()`][rlang::dots_list].
-#' @export
 make_list <- function(...) {
   dots_list(..., .named = TRUE)
 }
@@ -120,11 +105,6 @@ remove_file_ext <- function(file) {
   string_remove(file, "\\.[^.]+$")
 }
 
-#' @title Check for metacharacters
-#' @description Test whether a string contains metacharacters or not.
-#' @param x A character string.
-#' @return A boolean.
-#' @export
 has_metachr <- function(x) {
   grepl(r"{[\\\[\](){}|?$^*+]}", x, perl = TRUE)
 }
