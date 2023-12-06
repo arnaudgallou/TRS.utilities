@@ -4,14 +4,15 @@
 \alias{get_jags_sims}
 \title{Extract the \code{sims} data from a JAGS object}
 \usage{
-get_jags_sims(x, vars)
+get_jags_sims(data, vars)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{data}{A data frame.}
 
 \item{vars}{Variables to select.}
 }
 \description{
-Extract the \code{sims} data from a model object returned by \code{\link[=run_jags]{run_jags()}}.
-Requires running \code{\link[=run_jags]{run_jags()}} with \code{save = TRUE} and \code{default_output = FALSE}.
+Extract the \code{sims} data from a model object returned by
+\code{\link[=run_jags]{run_jags()}}. Requires running \code{\link[=run_jags]{run_jags()}} with \code{save = TRUE} and
+\code{default_output = FALSE}.
 }

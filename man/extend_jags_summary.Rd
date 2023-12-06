@@ -4,10 +4,10 @@
 \alias{extend_jags_summary}
 \title{Extend JAGS summary}
 \usage{
-extend_jags_summary(x)
+extend_jags_summary(data)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{data}{A data frame.}
 }
 \description{
 Add standardized slope estimates and whether the 95\\% credible

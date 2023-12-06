@@ -12,7 +12,7 @@ make_regression_data <- function(files, by_land_type = FALSE) {
     }
     read_jags(files, item)
   })
-  out <- setNames(out, items)
+  out <- set_names(out, items)
   structure(out, class = c(cls, "list"))
 }
 

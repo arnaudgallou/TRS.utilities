@@ -4,10 +4,10 @@
 \alias{slice_draws}
 \title{Subset rows from a credible interval}
 \usage{
-slice_draws(x, estimates, prob = 0.95, n = 200, seed)
+slice_draws(data, estimates, prob = 0.95, n = 200, seed)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{data}{A data frame.}
 
 \item{estimates}{Column to subset the draws from.}
 

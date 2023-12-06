@@ -5,7 +5,7 @@
 \title{Compile model data}
 \usage{
 compile_mdl_data(
-  x,
+  data,
   clim_data = NULL,
   elevation_span,
   exclusion_zone,
@@ -19,7 +19,7 @@ compile_mdl_data(
 )
 }
 \arguments{
-\item{x}{A data frame containing data to pass on to a JAGS model.}
+\item{data}{A data frame containing data to pass on to a JAGS model.}
 
 \item{clim_data}{A data frame containing climate data. Only to be specified if
 \code{average=TRUE}.}

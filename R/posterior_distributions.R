@@ -12,7 +12,7 @@
 #' @param ... Other arguments passed on to [`ggplot2::ggplot()`].
 #' @export
 posterior_distributions <- function(
-    x,
+    data,
     mapping = aes(),
     scale = 1,
     vline_type = 1,
@@ -20,25 +20,25 @@ posterior_distributions <- function(
     facet_args = list(),
     ...
 ) {
-  den_mass <- unique(x$ci_id)
+  den_mass <- unique(data$ci_id)
   n_mass <- length(den_mass)
   facet_dims <- Filter(Negate(is.null), facet_args[c("rows", "cols")])
   yvar <- mapping$y
 
-  df_seg <- distinct(x, !!!unlist(facet_dims), {{yvar}}, .keep_all = TRUE)
+  df_seg <- distinct(data, !!!unlist(facet_dims), {{yvar}}, .keep_all = TRUE)
   df_seg <- mutate(
     df_seg,
     ymin = as.numeric(factor({{yvar}})),
     ymax = .data$ymax * scale
   )
 
-  plot <- ggplot(x, mapping, ...) +
+  plot <- ggplot(data, mapping, ...) +
     line_0(linetype = vline_type, color = vline_color) +
     map2(
       den_mass,
       sort(seq(0, 1, length.out = n_mass), decreasing = TRUE),
       ~ {
-        base_rl_args <- list(data = filter(x, ci_id == .x), scale = scale)
+        base_rl_args <- list(data = filter(data, ci_id == .x), scale = scale)
         cond_rl_args <- if (.x != den_mass[n_mass]) {
           c(alpha = .y, size = NA)
         } else {

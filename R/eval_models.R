@@ -1,4 +1,3 @@
-#' @importFrom loo waic loo relative_eff
 #' @title Evaluate JAGS models
 #' @description Compare multiple JAGS models using the WAIC and leave-one-out
 #'   (LOO) cross-validation methods.

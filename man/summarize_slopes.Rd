@@ -4,10 +4,10 @@
 \alias{summarize_slopes}
 \title{Compute the proportion of positive and negative slopes}
 \usage{
-summarize_slopes(x)
+summarize_slopes(data)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{data}{A data frame.}
 }
 \description{
 Compute the proportion of positive and negative slopes in a data

@@ -28,7 +28,7 @@ list_files <- function(path = ".", target = NULL, names, full.names = TRUE, ...)
     } else {
       nm <- names
     }
-    out <- setNames(out, nm)
+    out <- set_names(out, nm)
   }
   structure(out, class = c("collection", "character"))
 }

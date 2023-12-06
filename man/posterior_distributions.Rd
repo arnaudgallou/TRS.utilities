@@ -5,7 +5,7 @@
 \title{Plot posterior distribution from a bayesian model}
 \usage{
 posterior_distributions(
-  x,
+  data,
   mapping = aes(),
   scale = 1,
   vline_type = 1,
@@ -15,8 +15,6 @@ posterior_distributions(
 )
 }
 \arguments{
-\item{x}{A data frame.}
-
 \item{mapping}{Default list of aesthetic mappings to use for plot.
 See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
 
@@ -31,6 +29,8 @@ See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
 \code{\link[ggh4x:facet_grid2]{ggh4x::facet_grid2()}}.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.}
+
+\item{x}{A data frame.}
 }
 \description{
 Plot posterior distribution from a bayesian model.

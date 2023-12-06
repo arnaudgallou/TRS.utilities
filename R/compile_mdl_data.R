@@ -1,6 +1,6 @@
 #' @title Compile model data
 #' @description Compile data for a JAGS model.
-#' @param x A data frame containing data to pass on to a JAGS model.
+#' @param data A data frame containing data to pass on to a JAGS model.
 #' @param clim_data A data frame containing climate data. Only to be specified if
 #'   `average=TRUE`.
 #' @param elevation_span Minimum length of the elevational gradients to filter.
@@ -25,7 +25,7 @@
 #' @return A list of JAGS-compatible data.
 #' @export
 compile_mdl_data <- function(
-    x,
+    data,
     clim_data = NULL,
     elevation_span,
     exclusion_zone,
@@ -49,14 +49,14 @@ compile_mdl_data <- function(
     terms <- expr
   }
 
-  x <- filter_locations(x, elevation_span, singleton_thr)
+  data <- filter_locations(data, elevation_span, singleton_thr)
   if (is_true(std_elev_grad)) {
-    x <- std_elev_grad(x, length = elevation_span, from = std_from)
+    data <- std_elev_grad(data, length = elevation_span, from = std_from)
   }
   if (!missing(exclusion_zone)) {
-    x <- filter_species(x, exclusion_zone = exclusion_zone)
+    data <- filter_species(data, exclusion_zone = exclusion_zone)
   }
-  x <- all_data <- drop_na(x, starts_with("bio")) |>
+  data <- all_data <- drop_na(data, starts_with("bio")) |>
     mutate(sp_range = {
       out <- if_else(.data$sp_range == 0, 10, .data$sp_range)
       log(out)
@@ -65,32 +65,32 @@ compile_mdl_data <- function(
   cols <- unique(c(cols, "location", "land_type", "sp_range", terms))
 
   if (is_true(average)) {
-    x <- group_by(x, .data$location) |>
+    data <- group_by(data, .data$location) |>
       mutate(sp_range = mean(.data$sp_range))
 
-    elev_grad_clim <- get_elev_grad_clim(x, clim_data, keep_vars = cols)
+    elev_grad_clim <- get_elev_grad_clim(data, clim_data, keep_vars = cols)
 
-    x <- elev_grad_clim |>
+    data <- elev_grad_clim |>
       group_by(.data$location) |>
       mutate(across(starts_with("bio"), mean)) |>
       ungroup() |>
       distinct(.data$location, .keep_all = TRUE)
   }
   if (is_true(rename_bioclim)) {
-    x <- rename_bioclim(x)
+    data <- rename_bioclim(data)
     if (exists("elev_grad_clim")) {
       elev_grad_clim <- rename_bioclim(elev_grad_clim)
     }
   }
 
-  x <- select(x, any_of(cols))
+  data <- select(data, any_of(cols))
 
   if (is.null(formula)) {
-    x <- rename(x, term = terms)
+    data <- rename(data, term = terms)
   }
-  x <- compose_mdl_data(x, formula)
+  data <- compose_mdl_data(data, formula)
   if (is_true(average)) {
-    x <- c(x, list(
+    data <- c(data, list(
       n_obs = nrow(all_data),
       location_obs = factor(all_data$location),
       sp_range_obs = all_data$sp_range
@@ -107,15 +107,15 @@ compile_mdl_data <- function(
     terms,
     std_from
   )
-  out <- list(data = x, settings = settings)
+  out <- list(data = data, settings = settings)
   if (exists("elev_grad_clim")) {
     out <- c(out, list(elev_grad_clim = elev_grad_clim))
   }
   out
 }
 
-filter_species <- function(x, exclusion_zone) {
-  out <- group_by(x, .data$location)
+filter_species <- function(data, exclusion_zone) {
+  out <- group_by(data, .data$location)
   out <- mutate(
     out,
     upper_exclusion_lim = .data$elev_span_max - exclusion_zone,
@@ -129,9 +129,9 @@ filter_species <- function(x, exclusion_zone) {
   ungroup(out)
 }
 
-std_elev_grad <- function(x, length, from) {
+std_elev_grad <- function(data, length, from) {
   if (from == "top") {
-    out <- mutate(x, elev_span_min = .data$elev_span_max - length)
+    out <- mutate(data, elev_span_min = .data$elev_span_max - length)
     out <- filter(out, .data$sp_max >= .data$elev_span_min)
     out <- mutate(out, sp_min = if_else(
       .data$sp_min < .data$elev_span_min,
@@ -139,7 +139,7 @@ std_elev_grad <- function(x, length, from) {
       .data$sp_min
     ))
   } else {
-    out <- mutate(x, elev_span_max = .data$elev_span_min + length)
+    out <- mutate(data, elev_span_max = .data$elev_span_min + length)
     out <- filter(out, .data$sp_min <= .data$elev_span_max)
     out <- mutate(out, sp_max = if_else(
       .data$sp_max > .data$elev_span_max,
@@ -155,12 +155,13 @@ std_elev_grad <- function(x, length, from) {
   )
 }
 
-rename_bioclim <- function(x) {
-  rename(x, mat = .data$bio1, dtr = .data$bio2, ts = .data$bio4, ap = .data$bio12)
+rename_bioclim <- function(data) {
+  nms <- set_names(paste0("bio", c(1, 2, 4, 12)), c("mat", "dtr", "ts", "ap"))
+  rename(data, any_of(nms))
 }
 
-get_elev_grad_clim <- function(x, clim_data, keep_vars) {
-  out <- distinct(x, .data$location, .keep_all = TRUE)
+get_elev_grad_clim <- function(data, clim_data, keep_vars) {
+  out <- distinct(data, .data$location, .keep_all = TRUE)
   keep_vars <- discard(keep_vars, names(clim_data))
   out <- select(out, starts_with("elev_span"), any_of(keep_vars))
   out <- left_join(out, clim_data, by = "location")
@@ -169,6 +170,6 @@ get_elev_grad_clim <- function(x, clim_data, keep_vars) {
   ungroup(out)
 }
 
-filter_locations <- function(x, elevation_span, singleton_thr) {
-  filter(x, .data$elev_span >= elevation_span, .data$singleton <= singleton_thr)
+filter_locations <- function(data, elevation_span, singleton_thr) {
+  filter(data, .data$elev_span >= elevation_span, .data$singleton <= singleton_thr)
 }

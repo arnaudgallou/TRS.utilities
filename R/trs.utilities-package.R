@@ -1,7 +1,7 @@
 #' @description Helpers functions to reproduce results from the TRS project.
 #' @keywords internal
 #' @importFrom rlang .data := %||%
-#' @importFrom rlang quos quo enquo exprs parse_exprs fn_fmls
+#' @importFrom rlang quos quo enquo exprs parse_exprs fn_fmls set_names
 #' @importFrom rlang is_formula is_empty is_false is_true is_string have_name
 #' @importFrom rlang abort caller_env list2 dots_list zap
 #' @importFrom tidyselect all_of any_of starts_with ends_with matches contains
@@ -26,8 +26,9 @@
 #' @importFrom tidyr pivot_wider nest unnest drop_na
 #' @importFrom readr write_rds read_rds read_csv
 #' @importFrom purrr map map2 imap pluck list_rbind
-#' @importFrom stats sd density median quantile var model.matrix setNames
+#' @importFrom stats sd density median quantile var model.matrix
 #' @importFrom janitor clean_names make_clean_names
 #' @importFrom glue glue
+#' @importFrom loo waic loo relative_eff
 #' @importFrom colorspace darken
 "_PACKAGE"

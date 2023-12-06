@@ -208,5 +208,5 @@ regression_theme <- function(n_labels) {
 
 get_facet_vars <- function(x, facet_cols) {
   out <- unique(x$data[[facet_cols]])
-  setNames(out, out)
+  set_names(out, out)
 }
