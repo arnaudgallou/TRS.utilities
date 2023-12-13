@@ -17,7 +17,7 @@ rs_read.collection <- function(x, ...) {
   class(x) <- "character"
   out <- terra::rast(x, ...)
   if (all(have_name(x))) {
-    out <- set_names(out, names(x))
+    out <- stats::setNames(out, names(x))
   }
   out
 }
@@ -87,7 +87,7 @@ rs_reclass <- function(x, binwidth = 100, right = FALSE, col_name = "zone", ...)
   s <- seq(min, max, binwidth)
   new_values <- tibble(lower = s, upper = s + binwidth, new = s)
   x <- terra::classify(x, new_values, right = right, ...)
-  set_names(x, col_name)
+  stats::setNames(x, col_name)
 }
 
 #' @title WGS84 coordinate reference system
