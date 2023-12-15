@@ -12,7 +12,7 @@ make_regression_data(files, by_land_type = FALSE)
 \item{by_land_type}{Should estimates be calculated by land type?}
 }
 \description{
-Structure data for \code{\link[=regressions]{regressions()}}.
+Structure data for \code{\link[=plot_regressions]{plot_regressions()}}.
 }
 \examples{
 \dontrun{

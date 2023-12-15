@@ -1,5 +1,5 @@
 #' @title Prepare data for regression plots
-#' @description Structure data for [`regressions()`].
+#' @description Structure data for [`plot_regressions()`].
 #' @param files Files to get data from.
 #' @param by_land_type Should estimates be calculated by land type?
 #' @examples

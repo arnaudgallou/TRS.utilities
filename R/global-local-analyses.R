@@ -41,7 +41,7 @@ GlobalAnalyses <- R6::R6Class(
     #'   dimension.
     #' @param facet_rows Variable defining faceting groups on the rows dimension.
     #' @param labels A character vector used to label the x axis. See
-    #'   [`regressions()`] for details.
+    #'   [`plot_regressions()`] for details.
     #' @param by_land_type Should regressions be drawn for each land type?
     #' @param point_labels Should point labels be shown?
     regressions = function(
@@ -57,7 +57,7 @@ GlobalAnalyses <- R6::R6Class(
     ) {
       fls <- private$get_files(vars, elev_span, excl_zone, std_from)
       data <- make_regression_data(fls, by_land_type)
-      regressions(data, facet_cols, facet_rows, labels, point_labels = point_labels)
+      plot_regressions(data, facet_cols, facet_rows, labels, point_labels = point_labels)
     },
 
     #' @description Plot posterior distribution from a bayesian model.

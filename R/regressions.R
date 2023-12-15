@@ -11,10 +11,10 @@
 #' \dontrun{
 #' get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
 #'   make_regression_data() |>
-#'   regressions()
+#'   plot_regressions()
 #' }
 #' @export
-regressions <- function(
+plot_regressions <- function(
     data,
     facet_cols = "expl_var",
     facet_rows = "exclusion_zone",
@@ -50,16 +50,16 @@ regressions <- function(
   if (n_labels == 1L) {
     plot <- plot + xlab(labels)
   }
-  UseMethod("regressions")
+  UseMethod("plot_regressions")
 }
 
-#' @rdname regressions
+#' @rdname plot_regressions
 #' @param n_draws Number of draws to sample from the 95% credible interval.
 #' @param draws_prob Probability mass to sample the draws from.
 #' @param point_labels Should point labels be shown?
 #' @param seed Seed value for draw sampling.
 #' @export
-regressions.draws <- function(
+plot_regressions.draws <- function(
     data,
     facet_cols = "expl_var",
     facet_rows = "exclusion_zone",
@@ -116,9 +116,9 @@ regressions.draws <- function(
   plot + regression_theme(n_labels)
 }
 
-#' @rdname regressions
+#' @rdname plot_regressions
 #' @export
-regressions.land_types <- function(
+plot_regressions.land_types <- function(
     data,
     facet_cols = "expl_var",
     facet_rows = "exclusion_zone",

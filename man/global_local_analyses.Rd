@@ -89,7 +89,7 @@ dimension.}
 \item{\code{facet_rows}}{Variable defining faceting groups on the rows dimension.}
 
 \item{\code{labels}}{A character vector used to label the x axis. See
-\code{\link[=regressions]{regressions()}} for details.}
+\code{\link[=plot_regressions]{plot_regressions()}} for details.}
 
 \item{\code{by_land_type}}{Should regressions be drawn for each land type?}
 
