@@ -1,9 +1,7 @@
-#' @title Compose JAGS-compatible data
-#' @description Turn a data frame into a list of data to pass on to a JAGS model.
-#' @param data A data frame.
-#' @param matrix_formula A formula.
-#' @return A list of data to pass on to a JAGS model.
-#' @export
+# @description Turn a data frame into a list of data to pass on to a JAGS model.
+# @param data A data frame.
+# @param matrix_formula A formula.
+# @return A list of data to pass on to a JAGS model.
 compose_mdl_data <- function(data, matrix_formula = NULL) {
   data[] <- lapply(data, \(x) if (is.character(x)) as.factor(x) else x)
   data_ls <- as.list(data)

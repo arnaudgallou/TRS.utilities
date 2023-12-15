@@ -1,17 +1,10 @@
-#' @title Subset rows from a credible interval
-#' @description Wrapper around [`dplyr::slice_sample()`] that subsets rows from
-#'   a credible interval.
-#' @param data A data frame.
-#' @param estimates Column to subset the draws from.
-#' @param prob The probability mass to subset.
-#' @param n Number of draws to subset.
-#' @param seed Random [`seed`][set.seed()] to produce identical result.
-#' @examples
-#' \dontrun{
-#' df <- tibble(id = 1:500, value = rnorm(n = 500, mean = 0, sd = 5))
-#' slice_draws(df, estimates = value)
-#' }
-#' @export
+# @description Wrapper around [`dplyr::slice_sample()`] that subsets rows from
+#   a credible interval.
+# @param data A data frame.
+# @param estimates Column to subset the draws from.
+# @param prob The probability mass to subset.
+# @param n Number of draws to subset.
+# @param seed Random [`seed`][set.seed()] to produce identical result.
 slice_draws <- function(data, estimates, prob = .95, n = 200, seed) {
   if (n > nrow(data)) {
     warning("number of draws larger than data.")

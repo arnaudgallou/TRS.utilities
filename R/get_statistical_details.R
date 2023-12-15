@@ -41,11 +41,8 @@ r_squared <- function(x, y) {
   x / (x + y)
 }
 
-#' @title Calculate the probability of posterior fits to be lower than 0
-#' @description Calculate the probability of posterior fits to be lower than 0.
-#' @param data A data frame containing posterior fits.
-#' @return A [`tibble`][tibble::tibble()].
-#' @export
+# @description Calculate the probability of posterior fits to be lower than 0.
+# @param data A data frame containing posterior fits.
 calc_prob_inf_0 <- function(data) {
   out <- mutate(data, across(matches("beta"), ~ mean(.x < 0)))
   out <- distinct(out)
