@@ -142,7 +142,7 @@ Plot posterior distribution from a bayesian model.
 [\code{ggridges::geom_ridgeline()}][] for details.}
 
 \item{\code{labels}}{A character vector used to label the x axis. See
-\code{\link[=posterior_distributions]{posterior_distributions()}} for details.}
+\code{\link[=plot_posterior_distributions]{plot_posterior_distributions()}} for details.}
 
 \item{\code{reverse}}{Should the order of posterior distributions be reversed?}
 

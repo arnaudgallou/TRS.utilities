@@ -14,7 +14,7 @@
 #' \dontrun{
 #' get_files("path_to_dir", vars = "dtr", elevation_span = 2000) |>
 #'   make_posterior_data(yvar = "exclusion_zone") |>
-#'   posterior_distributions(aes(
+#'   plot_posterior_distributions(aes(
 #'     x = x,
 #'     y = exclusion_zone,
 #'     height = y,
@@ -23,7 +23,7 @@
 #'   ))
 #' }
 #' @export
-posterior_distributions <- function(
+plot_posterior_distributions <- function(
     data,
     mapping = aes(),
     scale = 1,

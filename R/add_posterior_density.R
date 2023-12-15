@@ -1,6 +1,6 @@
 # @description Add the Kernel density estimates and highest density interval of
 #   posterior distributions to a data frame before using
-#   [`posterior_distributions()`].
+#   [`plot_posterior_distributions()`].
 # @param data A data frame.
 # @param estimates Variable containing posterior distributions.
 # @param prob The probability mass to include in the shaded region.

@@ -72,7 +72,7 @@ GlobalAnalyses <- R6::R6Class(
     #' @param scales A scaling factor to scale the height of the ridgelines. See
     #'   [`ggridges::geom_ridgeline()`][] for details.
     #' @param labels A character vector used to label the x axis. See
-    #'   [`posterior_distributions()`] for details.
+    #'   [`plot_posterior_distributions()`] for details.
     #' @param reverse Should the order of posterior distributions be reversed?
     #' @param facet Should the plot be facetted?
     #' @param fill A vector of colors used to fill posterior distributions.
@@ -104,7 +104,7 @@ GlobalAnalyses <- R6::R6Class(
       fls <- private$get_files(vars, elev_span, excl_zone, std_from)
       data <- make_posterior_data(fls, yvar, prob, prob_outer, scales, labels, reverse)
       fill <- fill %||% rep("#5E8CBA", length(unique(data[[yvar]])))
-      posterior_distributions(
+      plot_posterior_distributions(
         data,
         aes(
           .data$x,
