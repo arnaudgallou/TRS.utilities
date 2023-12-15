@@ -14,3 +14,9 @@ make_regression_data(files, by_land_type = FALSE)
 \description{
 Structure data for \code{\link[=regressions]{regressions()}}.
 }
+\examples{
+\dontrun{
+get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
+  make_regression_data()
+}
+}

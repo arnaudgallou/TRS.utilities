@@ -27,5 +27,10 @@ details.}
 }
 \description{
 Read model object files returned by \code{\link[=run_jags]{run_jags()}}. Requires
-running \code{run_jags()} with \code{save=TRUE} and \code{default_output = FALSE}.
+running \code{run_jags()} with \code{save = TRUE} and \code{default_output = FALSE}.
+}
+\examples{
+\dontrun{
+get_files("path_to_dir", vars = "dtr") |> read_jags("data")
+}
 }

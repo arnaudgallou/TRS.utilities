@@ -17,3 +17,8 @@ A \code{\link[tibble:tibble]{tibble}}.
 Compute Bayesian R-squared and the probability of posterior fits
 to be lower than 0 from a JAGS model output.
 }
+\examples{
+\dontrun{
+readr::read_rds("path_to_file") |> get_statistical_details()
+}
+}

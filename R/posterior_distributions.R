@@ -1,6 +1,6 @@
-#' @title Plot posterior distribution from a bayesian model
-#' @description Plot posterior distribution from a bayesian model.
-#' @param x A data frame.
+#' @title Plot posterior distributions
+#' @description Plot posterior distributions.
+#' @param data A data frame produced by [`make_posterior_data()`].
 #' @param mapping Default list of aesthetic mappings to use for plot.
 #'   See [`ggplot2::ggplot()`] for details.
 #' @param scale A scaling factor to scale the height of the ridgelines. See
@@ -10,6 +10,18 @@
 #' @param facet_args A named list of parameters and arguments to pass on to
 #'   [`ggh4x::facet_grid2()`].
 #' @param ... Other arguments passed on to [`ggplot2::ggplot()`].
+#' @examples
+#' \dontrun{
+#' get_files("path_to_dir", vars = "dtr", elevation_span = 2000) |>
+#'   make_posterior_data(yvar = "exclusion_zone") |>
+#'   posterior_distributions(aes(
+#'     x = x,
+#'     y = exclusion_zone,
+#'     height = y,
+#'     color = exclusion_zone,
+#'     fill = exclusion_zone
+#'   ))
+#' }
 #' @export
 posterior_distributions <- function(
     data,

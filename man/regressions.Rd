@@ -47,7 +47,7 @@ explanatory variables.}
 
 \item{...}{Other arguments passed to methods.}
 
-\item{n_draws}{Number of draws to sample from the 95\\\% credible interval.}
+\item{n_draws}{Number of draws to sample from the 95\% credible interval.}
 
 \item{draws_prob}{Probability mass to sample the draws from.}
 
@@ -57,4 +57,11 @@ explanatory variables.}
 }
 \description{
 Plot regression fits.
+}
+\examples{
+\dontrun{
+get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
+  make_regression_data() |>
+  regressions()
+}
 }

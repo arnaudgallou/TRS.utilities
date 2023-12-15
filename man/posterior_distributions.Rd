@@ -2,7 +2,7 @@
 % Please edit documentation in R/posterior_distributions.R
 \name{posterior_distributions}
 \alias{posterior_distributions}
-\title{Plot posterior distribution from a bayesian model}
+\title{Plot posterior distributions}
 \usage{
 posterior_distributions(
   data,
@@ -15,6 +15,8 @@ posterior_distributions(
 )
 }
 \arguments{
+\item{data}{A data frame produced by \code{\link[=make_posterior_data]{make_posterior_data()}}.}
+
 \item{mapping}{Default list of aesthetic mappings to use for plot.
 See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
 
@@ -29,9 +31,20 @@ See \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} for details.}
 \code{\link[ggh4x:facet_grid2]{ggh4x::facet_grid2()}}.}
 
 \item{...}{Other arguments passed on to \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.}
-
-\item{x}{A data frame.}
 }
 \description{
-Plot posterior distribution from a bayesian model.
+Plot posterior distributions.
+}
+\examples{
+\dontrun{
+get_files("path_to_dir", vars = "dtr", elevation_span = 2000) |>
+  make_posterior_data(yvar = "exclusion_zone") |>
+  posterior_distributions(aes(
+    x = x,
+    y = exclusion_zone,
+    height = y,
+    color = exclusion_zone,
+    fill = exclusion_zone
+  ))
+}
 }

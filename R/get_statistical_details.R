@@ -4,6 +4,10 @@
 #'   to be lower than 0 from a JAGS model output.
 #' @param data A model object file returned by [`run_jags()`].
 #' @return A [`tibble`][tibble::tibble()].
+#' @examples
+#' \dontrun{
+#' readr::read_rds("path_to_file") |> get_statistical_details()
+#' }
 #' @export
 get_statistical_details <- function(data) {
   posteriors <- get_jags_sims(data, "beta")

@@ -24,7 +24,7 @@ make_posterior_data(
 \item{prob_outer}{The probability mass to include in the outer interval.}
 
 \item{scales}{A scaling factor to scale the height of the ridgelines. See
-[\code{ggridges::geom_ridgeline()}][] for details.}
+\code{\link[ggridges:geom_ridgeline]{ggridges::geom_ridgeline()}} for details.}
 
 \item{labels}{A named vector of labels used for plotting. Names must be the
 same as the explanatory variables.}
@@ -33,4 +33,10 @@ same as the explanatory variables.}
 }
 \description{
 Structure data for \code{\link[=posterior_distributions]{posterior_distributions()}}.
+}
+\examples{
+\dontrun{
+get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
+  make_posterior_data(yvar = "exclusion_zone")
+}
 }

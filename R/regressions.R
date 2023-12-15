@@ -7,6 +7,12 @@
 #'   several labels, each label must be named. Names must be the same as the
 #'   explanatory variables.
 #' @param ... Other arguments passed to methods.
+#' @examples
+#' \dontrun{
+#' get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
+#'   make_regression_data() |>
+#'   regressions()
+#' }
 #' @export
 regressions <- function(
     data,
@@ -48,7 +54,7 @@ regressions <- function(
 }
 
 #' @rdname regressions
-#' @param n_draws Number of draws to sample from the 95\\% credible interval.
+#' @param n_draws Number of draws to sample from the 95% credible interval.
 #' @param draws_prob Probability mass to sample the draws from.
 #' @param point_labels Should point labels be shown?
 #' @param seed Seed value for draw sampling.

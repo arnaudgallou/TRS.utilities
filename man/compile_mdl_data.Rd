@@ -22,7 +22,7 @@ compile_mdl_data(
 \item{data}{A data frame containing data to pass on to a JAGS model.}
 
 \item{clim_data}{A data frame containing climate data. Only to be specified if
-\code{average=TRUE}.}
+\code{average = TRUE}.}
 
 \item{elevation_span}{Minimum length of the elevational gradients to filter.}
 

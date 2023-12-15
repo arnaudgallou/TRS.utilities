@@ -2,7 +2,7 @@
 #' @description Compile data for a JAGS model.
 #' @param data A data frame containing data to pass on to a JAGS model.
 #' @param clim_data A data frame containing climate data. Only to be specified if
-#'   `average=TRUE`.
+#'   `average = TRUE`.
 #' @param elevation_span Minimum length of the elevational gradients to filter.
 #' @param exclusion_zone Length of the upper and lower sections of the elevational
 #'   gradient to discard species from. E.g. an exclusion zone of 250 will discard

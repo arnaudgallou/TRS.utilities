@@ -2,6 +2,11 @@
 #' @description Structure data for [`regressions()`].
 #' @param files Files to get data from.
 #' @param by_land_type Should estimates be calculated by land type?
+#' @examples
+#' \dontrun{
+#' get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
+#'   make_regression_data()
+#' }
 #' @export
 make_regression_data <- function(files, by_land_type = FALSE) {
   items <- c("data", "sims")
@@ -48,10 +53,15 @@ calc_pred_conf <- function(files) {
 #' @param prob The probability mass to include in the shaded region.
 #' @param prob_outer The probability mass to include in the outer interval.
 #' @param scales A scaling factor to scale the height of the ridgelines. See
-#'   [`ggridges::geom_ridgeline()`][] for details.
+#'   [`ggridges::geom_ridgeline()`] for details.
 #' @param labels A named vector of labels used for plotting. Names must be the
 #'   same as the explanatory variables.
 #' @param reverse Should the order of posterior distributions be reversed?
+#' @examples
+#' \dontrun{
+#' get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
+#'   make_posterior_data(yvar = "exclusion_zone")
+#' }
 #' @export
 make_posterior_data <- function(
     files,
