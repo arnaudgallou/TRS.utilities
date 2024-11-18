@@ -6,7 +6,18 @@
 #' @param labels A character vector used to label the x axis. If `labels` contains
 #'   several labels, each label must be named. Names must be the same as the
 #'   explanatory variables.
-#' @param ... Other arguments passed to methods.
+#' @param ... Other arguments passed to methods. See details.
+#' @details
+#' Other parameters for objects with S3 class `draws`:
+#'
+#'  **n_draws** Number of draws to sample from the 95% credible interval.
+#'
+#'  **draws_prob** Probability mass to sample the draws from.
+#'
+#'  **point_labels** Should point labels be shown?
+#'
+#'  **seed** Seed value for draw sampling.
+#'
 #' @examples
 #' \dontrun{
 #' get_files("path_to_dir", vars = c("dtr", "ts"), elevation_span = 2000) |>
@@ -31,6 +42,7 @@ plot_regressions <- function(
     plot_data <- map(data, \(x) {
       mutate(x, !!facet_cols := factor(.data[[facet_cols]], levels = names(labels)))
     })
+    class(plot_data) <- class(data)
   } else {
     labellers <- facet_vars
     plot_data <- data
@@ -50,27 +62,34 @@ plot_regressions <- function(
   if (n_labels == 1L) {
     plot <- plot + xlab(labels)
   }
-  UseMethod("plot_regressions")
+  plot_regressions_(
+    plot_data,
+    plot,
+    . = list(
+      facet_cols = facet_cols,
+      facet_rows = facet_rows,
+      colors = colors,
+      n_labels = n_labels
+    ),
+    ...
+  )
 }
 
-#' @rdname plot_regressions
-#' @param n_draws Number of draws to sample from the 95% credible interval.
-#' @param draws_prob Probability mass to sample the draws from.
-#' @param point_labels Should point labels be shown?
-#' @param seed Seed value for draw sampling.
-#' @export
-plot_regressions.draws <- function(
-    data,
-    facet_cols = "expl_var",
-    facet_rows = "exclusion_zone",
-    labels = NULL,
+plot_regressions_ <- function(plot_data, plot, ., ...) {
+  UseMethod("plot_regressions_")
+}
+
+plot_regressions_.draws <- function(
+    plot_data,
+    plot,
+    .,
     ...,
     n_draws = 600,
     draws_prob = .95,
     point_labels = FALSE,
     seed = 130821
 ) {
-  draws <- group_by(plot_data$sims, .data[[facet_cols]], .data[[facet_rows]])
+  draws <- group_by(plot_data$sims, .data[[.$facet_cols]], .data[[.$facet_rows]])
   draws <- slice_draws(draws, .data$beta_2, draws_prob, n_draws, seed = seed)
   mean_draws <- summarize(
     draws,
@@ -84,7 +103,7 @@ plot_regressions.draws <- function(
       geom_abline(
         aes(slope = .data$beta_2, intercept = .data$beta_1),
         data = draws,
-        color = colors$draws,
+        color = .$colors$draws,
         alpha = .1,
         size = .25
       )
@@ -93,7 +112,7 @@ plot_regressions.draws <- function(
     geom_abline(
       aes(slope = .data$mean_beta_2, intercept = .data$mean_beta_1),
       data = mean_draws,
-      colour = colors$mean_draw,
+      colour = .$colors$mean_draw,
       size = if (point_labels) .25 else 1,
       alpha = if (point_labels) .7 else 1
     )
@@ -103,7 +122,7 @@ plot_regressions.draws <- function(
       size = .3
     )
   }
-  plot <- plot + regression_points(colors, point_labels)
+  plot <- plot + regression_points(.$colors, point_labels)
   if (is_true(point_labels)) {
     plot <- plot +
       ggrepel::geom_text_repel(
@@ -113,18 +132,10 @@ plot_regressions.draws <- function(
         show.legend = FALSE
       )
   }
-  plot + regression_theme(n_labels)
+  plot + regression_theme(.$n_labels)
 }
 
-#' @rdname plot_regressions
-#' @export
-plot_regressions.land_types <- function(
-    data,
-    facet_cols = "expl_var",
-    facet_rows = "exclusion_zone",
-    labels = NULL,
-    ...
-) {
+plot_regressions_.land_types <- function(plot_data, plot, ., ...) {
   plot +
     geom_ribbon(
       aes(
@@ -141,15 +152,15 @@ plot_regressions.land_types <- function(
       aes(x = .data$value, y = .data$estimate, color = .data$land_type),
       data = plot_data$sims
     ) +
-    scale_color_manual(values = colors$ribbons) +
-    scale_fill_manual(values = colors$ribbons) +
+    scale_color_manual(values = .$colors$ribbons) +
+    scale_fill_manual(values = .$colors$ribbons) +
     ggnewscale::new_scale_fill() +
     geom_errorbar(
       aes(ymin = .data$se_min, ymax = .data$se_max),
       size = .3
     ) +
-    regression_points(colors) +
-    regression_theme(n_labels)
+    regression_points(.$colors) +
+    regression_theme(.$n_labels)
 }
 
 regression_colors <- function() {

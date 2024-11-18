@@ -2,31 +2,9 @@
 % Please edit documentation in R/regressions.R
 \name{plot_regressions}
 \alias{plot_regressions}
-\alias{plot_regressions.draws}
-\alias{plot_regressions.land_types}
 \title{Plot regression fits}
 \usage{
 plot_regressions(
-  data,
-  facet_cols = "expl_var",
-  facet_rows = "exclusion_zone",
-  labels = NULL,
-  ...
-)
-
-\method{plot_regressions}{draws}(
-  data,
-  facet_cols = "expl_var",
-  facet_rows = "exclusion_zone",
-  labels = NULL,
-  ...,
-  n_draws = 600,
-  draws_prob = 0.95,
-  point_labels = FALSE,
-  seed = 130821
-)
-
-\method{plot_regressions}{land_types}(
   data,
   facet_cols = "expl_var",
   facet_rows = "exclusion_zone",
@@ -45,18 +23,21 @@ plot_regressions(
 several labels, each label must be named. Names must be the same as the
 explanatory variables.}
 
-\item{...}{Other arguments passed to methods.}
-
-\item{n_draws}{Number of draws to sample from the 95\% credible interval.}
-
-\item{draws_prob}{Probability mass to sample the draws from.}
-
-\item{point_labels}{Should point labels be shown?}
-
-\item{seed}{Seed value for draw sampling.}
+\item{...}{Other arguments passed to methods. See details.}
 }
 \description{
 Plot regression fits.
+}
+\details{
+Other parameters for objects with S3 class \code{draws}:
+
+\strong{n_draws} Number of draws to sample from the 95\% credible interval.
+
+\strong{draws_prob} Probability mass to sample the draws from.
+
+\strong{point_labels} Should point labels be shown?
+
+\strong{seed} Seed value for draw sampling.
 }
 \examples{
 \dontrun{
